@@ -65,7 +65,7 @@ choosePort(HOST, DEFAULT_PORT)
     const urls = prepareUrls(protocol, HOST, port);
     // Create a webpack compiler that is configured with custom messages.
     // const compiler = createCompiler(webpack, config, appName, urls, useYarn);
-    // const compiler = createCompiler(webpack, webpackClientConfig, appName, urls, useYarn);
+    const compiler = createCompiler(webpack, webpackClientConfig, appName, urls, useYarn);
     // Load proxy config
     const proxySetting = require(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(proxySetting, paths.appPublic);
@@ -77,18 +77,18 @@ choosePort(HOST, DEFAULT_PORT)
     // );
 
     const compilerServer = webpack(webpackServerConfig, function(err, stats) {
-      console.log(stats);
       if (err || stats.hasErrors() || stats.hasWarnings()) {
         // process.throw
         console.log(chalk.red(stats.compilation.errors));
         process.exit(1);
       } else {
-        process.exit(0);
+        console.log('start child process here');
+        // process.exit(0);
       }
     });
 
-    // server.use(webpackDevMiddleware(compiler));
-    // server.listen(3001, console.log('on 3001'));
+    server.use(webpackDevMiddleware(compiler));
+    server.listen(3001, console.log('on 3001'));
 
     // const devServer = new WebpackDevServer(compiler, serverConfig);
     // Launch WebpackDevServer.
