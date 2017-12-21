@@ -75,8 +75,9 @@ choosePort(HOST, DEFAULT_PORT)
       
     //   urls.lanUrlForConfig
     // );
-console.log(webpackServerConfig);
+
     const compilerServer = webpack(webpackServerConfig, function(err, stats) {
+      console.log(stats);
       if (err || stats.hasErrors() || stats.hasWarnings()) {
         // process.throw
         console.log(chalk.red(stats.compilation.errors));
