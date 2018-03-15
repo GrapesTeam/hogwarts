@@ -1,3 +1,5 @@
-import store from './store.dev';
-
-export default store;
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./store.prod')
+} else {
+  module.exports = require('./store.dev')
+}

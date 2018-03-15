@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import teachers from '../About/teachersModule';
+import teachers from 'Teachers/module/teachers';
 
 const reducers = combineReducers({
   teachers
