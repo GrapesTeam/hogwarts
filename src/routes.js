@@ -32,6 +32,10 @@ const routes = [
   {
     path: '/teachers',
     component: Teachers
+  },
+  {
+    path: '/teacher',
+    component: Teachers
   }
 ]
 

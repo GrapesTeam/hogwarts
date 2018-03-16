@@ -1,9 +1,15 @@
 import axios from 'axios';
 
+
 const api = axios.create({
-  baseURL: 'https://xdonghai.italki.com/api',
   credentials: true
 });
+
+if (process.env.NODE_ENV === 'production') {
+  api.defaults.baseURL = process.env.REACT_APP_API_URL_PROD
+} else {
+  api.defaults.baseURL = process.env.REACT_APP_API_URL_DEV
+}
 
 api.interceptors.request.use(config => {
   return config;

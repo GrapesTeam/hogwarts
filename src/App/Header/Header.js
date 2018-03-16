@@ -9,6 +9,8 @@ class Header extends Component {
         <hr />
         <Link to="/teachers">teachers page</Link>
         <hr />
+        <Link to="/modal-gallery">modal gallery</Link>
+        <hr />
       </header>
     )
   }

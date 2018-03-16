@@ -1,35 +1,40 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { actions } from './module/teachers';
-import TeacherCard from './TeacherCard';
+import React, { Component } from 'react'
+import { Switch, Route } from "react-router-dom"
+import TeachersList from './TeachersList'
+import Teacher from 'Teacher'
 
-class Teachers extends Component {
-  static prototypes = {
-    teachers: PropTypes.array.isRequired
-  };
-
-  handleClick = () => {
-    this.props.loadTeachers();
+export class TeachersPage extends Component {
+  previousLocation = this.props.location;
+  
+  componentWillUpdate(nextProps) {
+    const { location } = this.props;
+    if (
+      nextProps.history.action !== "POP" &&
+      (!location.state || !location.state.modal)
+    ) {
+      this.previousLocation = this.props.location;
+    }
   }
 
   render() {
-    const { teachers } = this.props;
+    const { location } = this.props;
+
+    const isModal = !!(
+      location.state &&
+      location.state.modal &&
+      this.previousLocation !== location
+    );
+    console.log(isModal)
     return (
-      <div className="about">
-        <button onClick={this.handleClick}>Load teachers</button>
-        {teachers.data.map(teacher => <TeacherCard key={teacher.id} {...teacher} />)}
+      <div className="teachers">
+        <Switch location={isModal ? this.previousLocation : location}>
+          <Route exact path="/teachers" component={TeachersList} />
+          <Route path="/teacher" component={Teacher} />
+        </Switch>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  teachers: state.teachers
-});
+export default TeachersPage;
 
-const mapDispatchToProps = {
-  ...actions
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Teachers);
