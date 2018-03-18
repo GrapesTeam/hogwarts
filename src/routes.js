@@ -30,11 +30,7 @@ const Teachers = Loadable({
 
 const routes = [
   {
-    path: '/teachers',
-    component: Teachers
-  },
-  {
-    path: '/teacher',
+    path: '/teacher*',
     component: Teachers
   }
 ]
