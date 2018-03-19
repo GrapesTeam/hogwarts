@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 class Header extends Component {
   render() {
@@ -9,8 +10,12 @@ class Header extends Component {
         <hr />
         <Link to="/teachers">teachers page</Link>
         <hr />
-        <Link to="/modal-gallery">modal gallery</Link>
+        <Link to="/landing">Landing</Link>
         <hr />
+        <FormattedMessage
+          id="ML026"
+          defaultMessage="Hello Michael Hsu!"
+        />
       </header>
     )
   }

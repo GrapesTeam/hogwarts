@@ -23,15 +23,25 @@ const LoadingComponent = ({ pastDelay, error }) => {
 };
 
 const Teachers = Loadable({
-  loader: () => import('Teachers'),
+  loader: () => import(/* webpackChunkName: "teachers" */ 'Teachers'),
   loading: LoadingComponent,
   delay: 200
 });
+
+const Landing = Loadable({
+  loader: () => import(/* webpackChunkName: "landing" */ 'Landing'),
+  loading: LoadingComponent,
+  delay: 200
+})
 
 const routes = [
   {
     path: '/teacher*',
     component: Teachers
+  },
+  {
+    path: '/landing',
+    component: Landing
   }
 ]
 
