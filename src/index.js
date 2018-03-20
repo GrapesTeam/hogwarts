@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
+import device from 'current-device'
 import createStore from './store';
 import api from './api';
 import './index.css';
@@ -10,12 +11,13 @@ import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
 
 const store = createStore(api);
+const deviceType = device.type;
 const renderApp = (translations={}, locale="en") => {
   ReactDOM.render(
     <IntlProvider locale={locale} messages={translations}>
       <Provider store={store}>
         <BrowserRouter>
-          <App />
+          <App device={deviceType} />
         </BrowserRouter>
       </Provider>
     </IntlProvider>,
@@ -45,7 +47,7 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
       <IntlProvider locale="en">
         <Provider store={store}>
           <BrowserRouter>
-            <App />
+            <App device={deviceType} />
           </BrowserRouter>
         </Provider>
       </IntlProvider>,

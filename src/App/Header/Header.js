@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 class Header extends Component {
   render() {
     return (
       <header>
-        <Link to="/">home</Link>
+        <NavLink exact to="/">home</NavLink>
         <hr />
-        <Link to="/teachers">teachers page</Link>
+        <NavLink to="/teachers">teachers page</NavLink>
         <hr />
-        <Link to="/landing">Landing</Link>
+        <NavLink to="/landing">Landing</NavLink>
         <hr />
         <FormattedMessage
           id="ML026"

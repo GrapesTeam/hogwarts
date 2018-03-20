@@ -5,6 +5,7 @@
   "dependencies": {
     "add": "^2.0.6",
     "axios": "^0.17.1",
+    "current-device": "^0.7.2",
     "eslint-config-react-app": "^2.1.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
