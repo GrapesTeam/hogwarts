@@ -37,6 +37,8 @@ async function loadLocale(render) {
   return render(translations);
 }
 
+loadLocale(renderApp)
+
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./App', () => {
     ReactDOM.render(
