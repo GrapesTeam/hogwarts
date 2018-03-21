@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import Landing from 'Landing'
 import LandingTablet from 'LandingTablet'
 import LandingMobile from 'LandingMobile'
+import Login from 'Login'
 import Teachers from 'Teachers'
 import device from 'current-device'
 
@@ -35,6 +36,12 @@ const routes = [
     desktop: Landing,
     mobile: LandingMobile,
     tablet: LandingTablet
+  },
+  {
+    path: '/login',
+    desktop: Login,
+    mobile: Login,
+    tablet: Login
   }
 ]
 
