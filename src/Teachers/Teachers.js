@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Switch, Route } from "react-router-dom"
 import TeachersList from './TeachersList'
+import TeachersListTablet from './TeachersListTablet'
+import TeachersListMobile from './TeachersListMobile'
 import Teacher from 'Teacher'
+import TeacherTablet from 'TeacherTablet'
+import TeacherMobile from 'TeacherMobile'
 
 class TeachersPage extends Component {
   previousLocation = this.props.location;
+
+  static contextTypes = {
+    device: PropTypes.string
+  }
 
   componentWillUpdate(nextProps) {
     const { location } = this.props;
@@ -17,6 +26,7 @@ class TeachersPage extends Component {
   }
 
   render() {
+    const { device } = this.context;
     const { location } = this.props;
 
     const isModal = !!(
@@ -27,8 +37,28 @@ class TeachersPage extends Component {
     return (
       <div className="teachers">
         <Switch location={isModal ? this.previousLocation : location}>
-          <Route exact path="/teachers" component={TeachersList} />
-          <Route path="/teacher/:id" component={Teacher} />
+          <Route exact path="/teachers" render={() => {
+            if (device === 'desktop') {
+              return <TeachersList />
+            } else if (device === 'tablet') {
+              return <TeachersListTablet />
+            } else if (device === 'mobile') {
+              return <TeachersListMobile />
+            } else {
+              return <TeachersList />
+            }
+          }} />
+          <Route path="/teacher/:id" render={() => {
+            if (device === 'desktop') {
+              return <Teacher />
+            } else if (device === 'tablet') {
+              return <TeacherTablet />
+            } else if (device === 'mobile') {
+              return <TeacherMobile />
+            } else {
+              return <Teacher />
+            }
+          }} />
         </Switch>
         {isModal ? <Route path="/teacher/:id" component={Modal} /> : null}
       </div>

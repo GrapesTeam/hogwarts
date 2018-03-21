@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Loadable from 'react-loadable';
+import Landing from 'Landing'
+import Teachers from 'Teachers'
 
 export const RouteWithSubRoutes = route => (
   <Route
@@ -11,28 +12,6 @@ export const RouteWithSubRoutes = route => (
     )}
   />
 );
-
-const LoadingComponent = ({ pastDelay, error }) => {
-  if (pastDelay) {
-    return <div>Loading...</div>;
-  } else if (error) {
-    return <div>Sorry, there was a problem loading the page.</div>;
-  } else {
-    return null;
-  }
-};
-
-const Teachers = Loadable({
-  loader: () => import(/* webpackChunkName: "teachers" */ 'Teachers'),
-  loading: LoadingComponent,
-  delay: 200
-});
-
-const Landing = Loadable({
-  loader: () => import(/* webpackChunkName: "landing" */ 'Landing'),
-  loading: LoadingComponent,
-  delay: 200
-})
 
 const routes = [
   {
