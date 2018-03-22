@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Switch, Route } from "react-router-dom"
 import { RouteWithSubRoutes } from 'routes';
-import TeachersList from './TeachersList'
-import TeachersListTablet from './TeachersListTablet'
-import TeachersListMobile from './TeachersListMobile'
-import Teacher from 'Teacher'
-import TeacherTablet from 'TeacherTablet'
-import TeacherMobile from 'TeacherMobile'
+import TeachersList, { TeachersListTablet, TeachersListMobile } from './TeachersList'
+import Teacher, { TeacherTablet, TeacherMobile } from 'Teacher'
 
 class TeachersPage extends Component {
   previousLocation = this.props.location;

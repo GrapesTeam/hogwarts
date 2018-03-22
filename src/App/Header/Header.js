@@ -14,12 +14,16 @@ class Header extends Component {
     return (
       <header>
         <NavLink exact to="/">home</NavLink>
-        <hr />
+        &nbsp;|&nbsp;
         <NavLink to="/teachers">teachers page</NavLink>
-        <hr />
+        &nbsp;|&nbsp;
         <NavLink to="/landing">Landing</NavLink>
-        <hr />
-        {auth.name ? <NavLink to="/logout">logout</NavLink> : <NavLink to="/login">login</NavLink>}
+        &nbsp;|&nbsp;
+        {auth.isLogin ? <NavLink to="/logout">logout</NavLink> : <NavLink to="/login">login</NavLink>}
+        &nbsp;|&nbsp;
+        {auth.isLogin ? <NavLink to="/logout">logout</NavLink> : <NavLink to="/signup">sign up</NavLink>}
+        &nbsp;|&nbsp;
+        <NavLink to="/profile">Profile</NavLink>
         <hr />
         <FormattedMessage
           id="ML026"

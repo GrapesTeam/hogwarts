@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actions } from './module/auth'
+import { actions } from 'Auth/module/auth'
 
-class Login extends Component {
+class LoginTablet extends Component {
   handleClick = () => {
     this.props.login({
       username: this.refs.username.value
@@ -13,7 +13,7 @@ class Login extends Component {
     const { auth } = this.props
     return (
       <div className="Login">
-        <p>I am <strong>desktop</strong> login</p>
+        <p>I am <strong>tablet</strong> login</p>
         <p>username: {auth.name}</p>
         <div>
           <label id="username">User name</label>
@@ -38,4 +38,4 @@ const mapDispatchToProps = {
   ...actions
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginTablet)

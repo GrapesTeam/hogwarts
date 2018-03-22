@@ -7,4 +7,16 @@ const Landing = Loadable({
   delay: 200
 })
 
+export const LandingTablet = Loadable({
+  loader: () => import(/* webpackChunkName: "/tablet/landing" */ './LandingTablet'),
+  loading: Loading,
+  delay: 200
+})
+
+export const LandingMobile = Loadable({
+  loader: () => import(/* webpackChunkName: "/mobile/landing" */ './LandingMobile'),
+  loading: Loading,
+  delay: 200
+})
+
 export default Landing

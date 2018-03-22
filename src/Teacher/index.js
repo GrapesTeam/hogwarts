@@ -7,4 +7,16 @@ const Teacher = Loadable({
   delay: 200
 })
 
+export const TeacherTablet = Loadable({
+  loader: () => import(/* webpackChunkName: "/tablet/teacher" */ './TeacherTablet'),
+  loading: Loading,
+  delay: 200
+})
+
+export const TeacherMobile = Loadable({
+  loader: () => import(/* webpackChunkName: "/mobile/teacher" */ './TeacherMobile'),
+  loading: Loading,
+  delay: 200
+})
+
 export default Teacher
