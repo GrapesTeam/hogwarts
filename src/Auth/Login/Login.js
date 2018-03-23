@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { actions } from 'Auth/module/auth'
 import GeeTest from 'Common/GeeTest'
 import InputField from 'Common/InputField'
-import withLogin from './withLogin'
+import WithLoginProps from './WithLoginProps'
 
 class Login extends Component {
   static propTypes = {
@@ -62,5 +62,5 @@ const mapDispatchToProps = {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withLogin
+  WithLoginProps
 )(Login)

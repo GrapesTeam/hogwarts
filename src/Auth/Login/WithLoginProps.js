@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-const withLogin = (WrappedComponent) => class extends Component {
+const WithLoginProps = (WrappedComponent) => class extends Component {
   formData = {}
 
   componentWillMount() {
@@ -44,4 +44,4 @@ const withLogin = (WrappedComponent) => class extends Component {
   }
 }
 
-export default withLogin
+export default WithLoginProps
