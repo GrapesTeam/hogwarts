@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-class GeeTest extends Component {
+class GeeTest extends PureComponent {
   static propTypes = {
     data: PropTypes.object,
     onSuccess: PropTypes.func.isRequired

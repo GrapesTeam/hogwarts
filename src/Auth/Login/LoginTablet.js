@@ -1,30 +1,47 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import GeeTest from 'Common/GeeTest'
 import { actions } from 'Auth/module/auth'
+import withLogin from './withLogin'
+import InputField from 'Common/InputField'
 
 class LoginTablet extends Component {
+  static propTypes = {
+    captcha: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
+  }
+
   handleClick = () => {
-    this.props.login({
-      username: this.refs.username.value
-    })
+    this.geeTest.verify();
   }
 
   render() {
-    const { auth } = this.props
+    const { auth, change, handleLogin } = this.props
+
     return (
       <div className="Login">
-        <p>I am <strong>tablet</strong> login</p>
-        <p>username: {auth.name}</p>
+        <p>I am <strong>desktop</strong> login</p>
         <div>
-          <label id="username">User name</label>
-          <input name="username" type="text" placeholder="Enter username" ref="username" />
+          <label id="email">User name</label>
+          <InputField
+            name="email"
+            type="email"
+            placeholder="enter email"
+            change={change}
+          />
         </div>
         <hr />
         <div>
           <label id="password">Password</label>
           <input name="password" type="password" ref="password" />
         </div>
-        <button type="button" onClick={this.handleClick}>login</button>
+        <GeeTest ref={instance => { this.geeTest = instance; }} data={auth.captcha} onSuccess={handleLogin}>
+          <button disabled={!auth.captchaReady} type="button" onClick={this.handleClick}>login</button>
+        </GeeTest>
       </div>
     )
   }
@@ -38,4 +55,7 @@ const mapDispatchToProps = {
   ...actions
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginTablet)
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withLogin
+)(LoginTablet)

@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 
-class Header extends Component {
+class Header extends PureComponent {
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    isLogin: PropTypes.bool
   }
 
   render() {
-    const { auth } = this.props;
+    const { isLogin } = this.props;
 
     return (
       <header>
@@ -19,9 +19,9 @@ class Header extends Component {
         &nbsp;|&nbsp;
         <NavLink to="/landing">Landing</NavLink>
         &nbsp;|&nbsp;
-        {auth.isLogin ? <NavLink to="/logout">logout</NavLink> : <NavLink to="/login">login</NavLink>}
+        {isLogin ? <NavLink to="/logout">logout</NavLink> : <NavLink to="/login">login</NavLink>}
         &nbsp;|&nbsp;
-        {auth.isLogin ? <NavLink to="/logout">logout</NavLink> : <NavLink to="/signup">sign up</NavLink>}
+        {isLogin ? <NavLink to="/logout">logout</NavLink> : <NavLink to="/signup">sign up</NavLink>}
         &nbsp;|&nbsp;
         <NavLink to="/profile">Profile</NavLink>
         <hr />

@@ -33,7 +33,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header auth={auth} />
+        <Header isLogin={auth.isLogin} />
         <div className="container">
           <Switch>
             {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
