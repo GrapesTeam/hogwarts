@@ -4,10 +4,12 @@ class Profile extends Component {
   render() {
     return (
       <div className="profile">
-        <p><strong>desktop</strong> profile</p>
+        <p>
+          <strong>desktop</strong> profile
+        </p>
       </div>
-    )
+    );
   }
 }
 
-export default Profile
+export default Profile;

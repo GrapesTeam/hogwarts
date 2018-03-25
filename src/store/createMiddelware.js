@@ -5,9 +5,10 @@ const middleware = api => ({ dispatch, getState }) => next => action => {
   if (!action.promise) {
     return next(action);
   }
-  const[ request, success, failure ] = action.types;
+  const [request, success, failure] = action.types;
   next({ type: request });
-  return action.promise(api)
+  return action
+    .promise(api)
     .then(({ data = {} }) => next({ type: success, response: data }))
     .catch(({ message, request, response }) => {
       if (response) {

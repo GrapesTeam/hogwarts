@@ -6,8 +6,8 @@ class TeacherMobile extends PureComponent {
       <div className="teacher-mobile">
         <h1>I am teacher mobile</h1>
       </div>
-    )
+    );
   }
 }
 
-export default TeacherMobile
+export default TeacherMobile;

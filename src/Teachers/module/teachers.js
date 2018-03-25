@@ -28,14 +28,18 @@ const teachers = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export const actions = {
   loadTeachers() {
-    return ({
-      types: [actionTypes.TEACHERS_REQUEST, actionTypes.TEACHERS_SUCCESS, actionTypes.TEACHERS_FAILURE],
+    return {
+      types: [
+        actionTypes.TEACHERS_REQUEST,
+        actionTypes.TEACHERS_SUCCESS,
+        actionTypes.TEACHERS_FAILURE
+      ],
       promise: api => api.get('/teachersv2')
-    });
+    };
   }
 };
 

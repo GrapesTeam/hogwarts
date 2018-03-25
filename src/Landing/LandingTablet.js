@@ -6,8 +6,8 @@ class Landing extends Component {
       <div className="landing">
         <h1>Landing tablet</h1>
       </div>
-    )
+    );
   }
 }
 
-export default Landing
+export default Landing;

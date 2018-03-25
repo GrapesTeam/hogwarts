@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Switch, Route } from "react-router-dom"
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
 import { RouteWithSubRoutes } from 'routes';
-import TeachersList, { TeachersListTablet, TeachersListMobile } from './TeachersList'
-import Teacher, { TeacherTablet, TeacherMobile } from 'Teacher'
+import TeachersList, {
+  TeachersListTablet,
+  TeachersListMobile
+} from './TeachersList';
+import Teacher, { TeacherTablet, TeacherMobile } from 'Teacher';
 
 class TeachersPage extends Component {
   previousLocation = this.props.location;
@@ -22,16 +25,16 @@ class TeachersPage extends Component {
       tablet: TeacherTablet,
       mobile: TeacherMobile
     }
-  ]
+  ];
 
   static contextTypes = {
     device: PropTypes.string
-  }
+  };
 
   componentWillUpdate(nextProps) {
     const { location } = this.props;
     if (
-      nextProps.history.action !== "POP" &&
+      nextProps.history.action !== 'POP' &&
       (!location.state || !location.state.modal)
     ) {
       this.previousLocation = this.props.location;
@@ -49,9 +52,16 @@ class TeachersPage extends Component {
     return (
       <div className="teachers">
         <Switch location={isModal ? this.previousLocation : location}>
-          {this.routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+          {this.routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
         </Switch>
-        {isModal ? <Route path="/teacher/:id" render={(props) => (<Modal {...props} route={this.routes[1]} />)} /> : null}
+        {isModal ? (
+          <Route
+            path="/teacher/:id"
+            render={props => <Modal {...props} route={this.routes[1]} />}
+          />
+        ) : null}
       </div>
     );
   }
@@ -67,24 +77,24 @@ const Modal = ({ history, route }) => {
     <div
       onClick={back}
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
-        background: "rgba(0, 0, 0, 0.15)"
+        background: 'rgba(0, 0, 0, 0.15)'
       }}
     >
       <div
         className="modal"
         style={{
-          position: "absolute",
-          background: "#fff",
+          position: 'absolute',
+          background: '#fff',
           top: 25,
-          left: "10%",
-          right: "10%",
+          left: '10%',
+          right: '10%',
           padding: 15,
-          border: "2px solid #444"
+          border: '2px solid #444'
         }}
       >
         <RouteWithSubRoutes {...route} />
@@ -97,4 +107,3 @@ const Modal = ({ history, route }) => {
 };
 
 export default TeachersPage;
-

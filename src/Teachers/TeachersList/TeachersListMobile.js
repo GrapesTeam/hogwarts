@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 
 class TeacherListMobile extends PureComponent {
   render() {
@@ -6,8 +6,8 @@ class TeacherListMobile extends PureComponent {
       <div className="teacher-list-mobile">
         <h1>I am teacher list mobile version</h1>
       </div>
-    )
+    );
   }
 }
 
-export default TeacherListMobile
+export default TeacherListMobile;

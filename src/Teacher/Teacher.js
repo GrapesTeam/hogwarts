@@ -6,8 +6,8 @@ class Teacher extends Component {
       <div className="teacher">
         <p>Teacher page</p>
       </div>
-    )
+    );
   }
 }
 
-export default Teacher
+export default Teacher;
