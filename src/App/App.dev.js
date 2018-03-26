@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { RouteWithSubRoutes } from 'routes';
 import Header from './Header';
 import DevTools from 'DevTools/DevTools';
+import { actions } from './module/locale';
 import './App.css';
 
 class App extends Component {
@@ -24,14 +25,12 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {}
-
   render() {
-    const { auth, routes } = this.props;
+    const { auth, lang, routes, switchLan } = this.props;
 
     return (
       <div className="App">
-        <Header isLogin={auth.isLogin} />
+        <Header isLogin={auth.isLogin} lang={lang} switchLan={switchLan} />
         <div className="container">
           <Switch>
             {routes.map((route, i) => (
@@ -46,7 +45,15 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  lang: state.locale.lang
 });
 
-export default compose(withRouter, connect(mapStateToProps))(App);
+const mapDispatchToProps = {
+  ...actions
+};
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(App);

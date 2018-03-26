@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Routes, { RouteWithSubRoutes } from 'routes';
+import { withRouter, Switch } from 'react-router-dom';
+import { RouteWithSubRoutes } from 'routes';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Header from './Header';
+import { actions } from './module/locale';
 import './App.css';
 
 class App extends Component {
+  static defaultProps = {
+    routes: []
+  };
+
   static childContextTypes = {
-    device: PropTypes.string.isRequired
+    device: PropTypes.string.isRequired,
+    routes: PropTypes.array
   };
 
   getChildContext() {
@@ -17,13 +25,17 @@ class App extends Component {
   }
 
   render() {
-    const { auth } = this.props;
+    const { auth, lang, routes, switchLan } = this.props;
 
     return (
       <div className="App">
-        <Header />
+        <Header isLogin={auth.isLogin} lang={lang} switchLan={switchLan} />
         <div className="container">
-          {Routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+          <Switch>
+            {routes.map((route, i) => (
+              <RouteWithSubRoutes key={i} {...route} />
+            ))}
+          </Switch>
         </div>
       </div>
     );
@@ -31,7 +43,15 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  lang: state.locale.lang
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  ...actions
+};
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(App);

@@ -4,12 +4,40 @@ import { NavLink } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 class Header extends PureComponent {
+  languages = [
+    { value: 'en', name: 'English' },
+    { value: 'zh-Hans', name: '中文简体' },
+    { value: 'zh-Hant', name: '中文繁體' },
+    { value: 'es', name: 'Español' },
+    { value: 'fr', name: 'Français' },
+    { value: 'pt', name: 'Português' },
+    { value: 'de', name: 'Deutsch' },
+    { value: 'ja', name: '日本語' },
+    { value: 'ko', name: '한국어' },
+    { value: 'it', name: 'Italiano' },
+    { value: 'ru', name: 'Русский' },
+    { value: 'ar', name: 'اللغة العربية' },
+    { value: 'cs', name: 'Čeština' },
+    { value: 'nl', name: 'Nederlands' },
+    { value: 'eo', name: 'Esperanto' },
+    { value: 'pl', name: 'Polski' },
+    { value: 'th', name: 'ไทย' },
+    { value: 'tr', name: 'Türkçe' },
+    { value: 'vi', name: 'Tiếng Việt' }
+  ];
+
   static propTypes = {
-    isLogin: PropTypes.bool
+    isLogin: PropTypes.bool,
+    lang: PropTypes.string,
+    switchLan: PropTypes.func
+  };
+
+  handleChange = () => {
+    this.props.switchLan(this.selectInstance.value);
   };
 
   render() {
-    const { isLogin } = this.props;
+    const { isLogin, lang } = this.props;
 
     return (
       <header>
@@ -34,8 +62,20 @@ class Header extends PureComponent {
         )}
         &nbsp;|&nbsp;
         <NavLink to="/profile">Profile</NavLink>
+        &nbsp;|&nbsp;
+        <select
+          defaultValue={lang}
+          onChange={this.handleChange}
+          ref={instance => (this.selectInstance = instance)}
+        >
+          {this.languages.map((l, i) => (
+            <option key={i} value={l.value}>
+              {l.name}
+            </option>
+          ))}
+        </select>
         <hr />
-        <FormattedMessage id="ML026" defaultMessage="Hello Michael Hsu!" />
+        <FormattedMessage id="AS" defaultMessage="Hello Michael Hsu!" />
       </header>
     );
   }

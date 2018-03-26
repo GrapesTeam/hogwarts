@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { addLocaleData } from 'react-intl';
 import device from 'current-device';
+import ConnectedIntlProvider from 'ConnectedIntlProvider';
 import createStore from './store';
 import api from './api';
 import routes from 'routes';
@@ -11,49 +12,63 @@ import './index.css';
 import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(api);
+let store;
 const deviceType = device.type;
-const renderApp = (translations = {}, locale = 'en') => {
+async function loadLocale() {
+  let translations;
+  let localeData;
+  let currentLanguage = localStorage.getItem('kp.hl');
+  let language = currentLanguage || navigator.language;
+  let newlanguage = language;
+  try {
+    translations = await import(/* webpackChunkName: "/i18n/[request]" */ `i18n/${language}.json`);
+    localeData = await import(/* webpackChunkName: "/i18n/[request]_locale" */ `react-intl/locale-data/${
+      language.indexOf('cn') !== -1 || language.indexOf('tw') !== -1
+        ? 'zh'
+        : language
+    }`);
+  } catch (err) {
+    language = 'en';
+    translations = await import(/* webpackChunkName: "/i18n/[request]" */ `i18n/${language}.json`);
+    localeData = await import(/* webpackChunkName: "/i18n/[request]_locale" */ `react-intl/locale-data/${language}`);
+    localStorage.setItem('kp.hl', language);
+  }
+  addLocaleData(localeData);
+  if (language === 'cn') newlanguage = 'zh-Hans';
+  if (language === 'tw') newlanguage = 'zh-Hant';
+
+  return {
+    language: newlanguage,
+    translations
+  };
+}
+
+const renderApp = (store, deviceType) => {
   ReactDOM.render(
-    <IntlProvider locale={locale} messages={translations}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ConnectedIntlProvider>
         <BrowserRouter>
           <App routes={routes} device={deviceType} />
         </BrowserRouter>
-      </Provider>
-    </IntlProvider>,
+      </ConnectedIntlProvider>
+    </Provider>,
     document.getElementById('root')
   );
 };
 
-async function loadLocale(render) {
-  let localeData;
-  let translations;
-  if (navigator.language.indexOf('en') !== -1) {
-    translations = await import(/* webpackChunkName: "/i18n/en" */ 'i18n/en.json');
-    localeData = await import(/* webpackChunkName: "/i18n/en_locale" */ 'react-intl/locale-data/en');
-  } else {
-    translations = await import(/* webpackChunkName: "/i18n/zh_cn" */ 'i18n/cn.json');
-    localeData = await import(/* webpackChunkName: "/i18n/zh_locale" */ 'react-intl/locale-data/zh');
-  }
-  addLocaleData([...localeData]);
-  return render(translations);
-}
-
-loadLocale(renderApp);
+loadLocale().then(({ language: lang, translations: messages }) => {
+  store = createStore(api, {
+    locale: {
+      lang: lang,
+      messages
+    }
+  });
+  renderApp(store, deviceType);
+});
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./App', () => {
-    ReactDOM.render(
-      <IntlProvider locale="en">
-        <Provider store={store}>
-          <BrowserRouter>
-            <App routes={routes} device={deviceType} />
-          </BrowserRouter>
-        </Provider>
-      </IntlProvider>,
-      document.getElementById('root')
-    );
+    renderApp(store, deviceType);
   });
 }
 
