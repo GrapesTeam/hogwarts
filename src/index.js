@@ -10,11 +10,13 @@ import api from './api';
 import routes from 'routes';
 import './index.css';
 import App from './App';
+import ItalkiSocket from 'until/socket';
 // import registerServiceWorker from './registerServiceWorker';
 
 let store;
 const deviceType = device.type;
 async function loadLocale() {
+  ItalkiSocket.open();
   let translations;
   let localeData;
   let currentLanguage = localStorage.getItem('kp.hl');

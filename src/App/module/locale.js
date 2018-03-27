@@ -22,7 +22,6 @@ const locale = (state = {}, action) => {
 
 export const actions = {
   switchLan(lang) {
-    console.log(lang);
     return async function(dispatch, getState) {
       dispatch({ type: actionTypes.LOCALE_REQUEST });
       try {
