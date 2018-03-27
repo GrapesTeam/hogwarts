@@ -16,16 +16,18 @@ class PublicRoute extends Component {
       <Route
         {...rest}
         render={props => {
-          return isLogin ? (
-            <Redirect
-              to={{
-                pathname: '/',
-                state: { from: props.location }
-              }}
-            />
-          ) : (
-            <Component {...props} />
-          );
+          const token = localStorage.getItem('kp.token');
+          if (!isLogin && !token) {
+            return <Component {...props} />;
+          }
+          
+          if (!isLogin && token) {
+            return (<p>logining now</p>)
+          }
+
+          if (isLogin) {
+            return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+          }
         }}
       />
     );

@@ -17,6 +17,8 @@ const auth = (state = { isLogin: false }, action) => {
       };
     }
     case actionTypes.LOGIN_SUCCESS: {
+      localStorage.setItem('kp.token', action.headers['x-token']);
+      localStorage.setItem('kp.vtoken', action.headers['v-token']);
       return {
         ...state,
         isLogin: true,
@@ -24,6 +26,8 @@ const auth = (state = { isLogin: false }, action) => {
       };
     }
     case actionTypes.LOGIN_FAILURE: {
+      localStorage.removeItem('kp.token');
+      localStorage.removeItem('kp.vtoken');
       return {
         ...state
       };
@@ -61,6 +65,7 @@ export const actions = {
       promise: api => api.get('/geetest/captcha')
     };
   },
+  
   login(payload) {
     return {
       types: [
@@ -71,6 +76,7 @@ export const actions = {
       promise: api => api.post('/login', payload)
     };
   },
+  
   signUp(payload) {
     return {
       types: [

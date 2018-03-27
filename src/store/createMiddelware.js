@@ -9,7 +9,7 @@ const middleware = api => ({ dispatch, getState }) => next => action => {
   next({ type: request });
   return action
     .promise(api)
-    .then(({ data = {} }) => next({ type: success, response: data }))
+    .then(({ data = {}, headers = {} }) => next({ type: success, response: data, headers }))
     .catch(({ message, request, response }) => {
       if (response) {
         // The request was made and the server responded with a status code

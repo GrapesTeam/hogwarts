@@ -14,14 +14,20 @@ class App extends Component {
   };
 
   static childContextTypes = {
-    device: PropTypes.string.isRequired,
-    routes: PropTypes.array
+    device: PropTypes.string.isRequired
   };
 
   getChildContext() {
     return {
       device: this.props.device
     };
+  }
+
+  componentWillMount() {
+    const token = localStorage.getItem('kp.token');
+    if (token) {
+      this.props.login({ i_token: token });
+    }
   }
 
   render() {

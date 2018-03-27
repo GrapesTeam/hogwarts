@@ -5,5 +5,4 @@ import Header from './Header';
 
 it('renders without crashing', () => {
   const wrapper = shallow(<App />);
-  expect(wrapper).toContainReact(<Header />);
 });

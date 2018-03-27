@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { RouteWithSubRoutes } from 'routes';
 import Header from './Header';
 import DevTools from 'DevTools/DevTools';
+import { actions as authActions } from 'Auth/module/auth';
 import { actions } from './module/locale';
 import './App.css';
 
@@ -15,14 +16,20 @@ class App extends Component {
   };
 
   static childContextTypes = {
-    device: PropTypes.string.isRequired,
-    routes: PropTypes.array
+    device: PropTypes.string.isRequired
   };
 
   getChildContext() {
     return {
       device: this.props.device
     };
+  }
+
+  componentWillMount() {
+    const token = localStorage.getItem('kp.token');
+    if (token) {
+      this.props.login({ i_token: token });
+    }
   }
 
   render() {
@@ -50,7 +57,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  ...actions
+  ...actions,
+  ...authActions
 };
 
 export default compose(

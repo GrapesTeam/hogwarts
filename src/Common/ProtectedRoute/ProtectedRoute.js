@@ -16,16 +16,18 @@ class ProtectedRoute extends Component {
       <Route
         {...rest}
         render={props => {
-          return isLogin ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: '/login',
-                state: { from: props.location }
-              }}
-            />
-          );
+          if (isLogin) {
+            return <Component {...props} />;
+          }
+          
+          const token = localStorage.getItem('kp.token');
+          if (!isLogin && token) {
+            return (<p>logining now</p>)
+          }
+
+          if (!isLogin && !token) {
+            return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+          }
         }}
       />
     );
