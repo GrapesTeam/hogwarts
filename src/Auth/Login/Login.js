@@ -6,6 +6,7 @@ import { actions } from 'Auth/module/auth';
 import GeeTest from 'Common/GeeTest';
 import InputField from 'Common/InputField';
 import WithLoginProps from './WithLoginProps';
+import { Helmet } from "react-helmet";
 
 class Login extends Component {
   static propTypes = {
@@ -24,6 +25,9 @@ class Login extends Component {
 
     return (
       <div className="Login">
+        <Helmet>
+          <title>Login</title>
+        </Helmet>
         <p>
           I am <strong>desktop</strong> login
         </p>
