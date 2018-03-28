@@ -12,7 +12,7 @@ async function loadLocale() {
   let newlanguage = language;
   try {
     translations = await import(/* webpackChunkName: "/i18n/[request]" */ `i18n/${language}.json`);
-    localeData = await import(/* webpackChunkName: "/i18n/[request]_locale" */ `react-intl/locale-data/${
+    localeData = await import(/* webpackChunkName: "/i18n/locale/[request]_locale" */ `react-intl/locale-data/${
       language.indexOf('cn') !== -1 || language.indexOf('tw') !== -1
         ? 'zh'
         : language
@@ -20,7 +20,7 @@ async function loadLocale() {
   } catch (err) {
     language = 'en';
     translations = await import(/* webpackChunkName: "/i18n/[request]" */ `i18n/${language}.json`);
-    localeData = await import(/* webpackChunkName: "/i18n/[request]_locale" */ `react-intl/locale-data/${language}`);
+    localeData = await import(/* webpackChunkName: "/i18n/locale/[request]_locale" */ `react-intl/locale-data/${language}`);
     localStorage.setItem('kp.hl', language);
   }
   addLocaleData(localeData);
