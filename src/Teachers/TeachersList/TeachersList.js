@@ -10,7 +10,7 @@ class TeachersList extends Component {
   };
 
   handleClick = () => {
-    this.props.loadTeachers();
+    this.props.loadSocket();
   };
 
   render() {

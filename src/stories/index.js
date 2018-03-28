@@ -6,4 +6,6 @@ import { linkTo } from '@storybook/addon-links';
 
 import InputField from '../Common/InputField';
 
-storiesOf('Input', module).add('with placeholder text', () => <InputField name="nickname" type="text" placeholder="Enter nickname" />);
+storiesOf('Input', module)
+  .add('placeholder text', () => <InputField name="nickname" type="text" placeholder="Enter nickname" />)
+  .add('password text', () => <InputField name="nickname" type="password" placeholder="Enter password" />);
