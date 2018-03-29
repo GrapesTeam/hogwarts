@@ -1,0 +1,92 @@
+button {
+  margin: 0;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover:enabled {
+  cursor: pointer;
+}
+
+button:disabled,
+button[disabled]{
+  opacity: 0.5;
+}
+
+/* Button color */
+.btn-main {
+  color: #ffffff;
+  background: #ff4238;
+}
+
+.btn-main:hover:enabled {
+  background: #8e191e;
+}
+
+.btn-default {
+  color: #000000;
+  background: #eeeeee;
+}
+
+.btn-error {
+  color: #ffffff;
+  background: #cb242b;
+}
+
+.btn-error:hover:enabled {
+  background: #8e191e;
+}
+
+.btn-success {
+  color: #ffffff;
+  background: #5ebd5e;
+}
+
+.btn-success:hover:enabled {
+  background: #428442;
+}
+
+.btn-instant-tutoring {
+  color: #ffffff;
+  background: #5ebfe2;
+}
+
+.btn-instant-tutoring:hover:enabled {
+  background: #42869e;
+}
+
+/* Button size */
+.btn-big {
+  height: 42px;
+  padding: 13px 12px;
+  font-family: 'Roboto';
+	font-size: 14px;
+}
+
+.btn-standard {
+  height: 36px;
+  padding: 10px 12px;
+  font-family: 'Roboto';
+	font-size: 14px;
+}
+
+.btn-medium {
+  height: 32px;
+  padding: 8px 12px;
+  font-family: 'Roboto';
+	font-size: 14px;
+}
+
+.btn-small {
+  height: 32px;
+  padding: 6px 12px;
+  font-family: 'Roboto';
+	font-size: 12px;
+}
