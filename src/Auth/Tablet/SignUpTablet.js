@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from 'Auth/module/auth';
-import WithSignUp from './WithSignUp';
+import { actions } from '../authModule';
 import GeeTest from 'Common/GeeTest';
-import InputField from 'Common/InputField';
 
-class SignUp extends Component {
+class SignUpTablet extends Component {
   static propTypes = {
     captcha: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
@@ -15,8 +12,36 @@ class SignUp extends Component {
     location: PropTypes.object.isRequired
   };
 
+  componentWillMount() {
+    const { auth, captcha, history } = this.props;
+    if (auth.isLogin) {
+      return history.replace('/');
+    }
+    captcha();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { auth, location: { state } } = nextProps;
+    if (auth.isLogin) {
+      if (state && state.from) {
+        this.props.history.push(nextProps.location.state.from);
+      } else {
+        this.props.history.push('/profile');
+      }
+    }
+  }
+
   handleClick = () => {
     this.geeTest.verify();
+  };
+
+  handleSignUp = captcha => {
+    this.props.signUp({
+      ...captcha,
+      nickname: this.refs.nickname.value,
+      email: this.refs.email.value,
+      password: this.refs.password.value
+    });
   };
 
   render() {
@@ -25,43 +50,39 @@ class SignUp extends Component {
     return (
       <div className="Login">
         <p>
-          I am <strong>desktop</strong> login
+          I am <strong>tablet</strong> login
         </p>
         <p>username: {auth.name}</p>
         <div>
           <label id="nickname">User name</label>
-          <InputField
+          <input
             name="nickname"
             type="text"
             placeholder="Enter nickname"
-            change={this.props.change}
+            ref="nickname"
           />
         </div>
         <hr />
         <div>
           <label id="email">Email</label>
-          <InputField
+          <input
             name="email"
             type="email"
             placeholder="Enter email"
-            change={this.props.change}
+            ref="email"
           />
         </div>
         <hr />
         <div>
           <label id="password">Password</label>
-          <InputField
-            name="password"
-            type="password"
-            change={this.props.change}
-          />
+          <input name="password" type="password" ref="password" />
         </div>
         <GeeTest
           ref={instance => {
             this.geeTest = instance;
           }}
           data={auth.captcha}
-          onSuccess={this.props.handleSignUp}
+          onSuccess={this.handleSignUp}
         >
           <button
             disabled={!auth.captchaReady}
@@ -84,7 +105,4 @@ const mapDispatchToProps = {
   ...actions
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  WithSignUp
-)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpTablet);

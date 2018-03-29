@@ -70,7 +70,6 @@ class TeachersPage extends Component {
 const Modal = ({ history, route }) => {
   const back = e => {
     e.stopPropagation();
-    console.log(history);
     history.goBack();
   };
   return (

@@ -9,14 +9,14 @@ const Landing = Loadable({
 
 export const LandingTablet = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "/tablet/landing" */ './LandingTablet'),
+    import(/* webpackChunkName: "/tablet/landing" */ './Tablet/LandingTablet'),
   loading: Loading,
   delay: 200
 });
 
 export const LandingMobile = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "/mobile/landing" */ './LandingMobile'),
+    import(/* webpackChunkName: "/mobile/landing" */ './Mobile/LandingMobile'),
   loading: Loading,
   delay: 200
 });

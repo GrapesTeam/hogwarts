@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TeacherCard from '../TeacherCard';
-import { actions } from '../module/teachers';
+import TeacherCard from './TeacherCard';
+import { actions } from './teachersModule';
 import { connect } from 'react-redux';
 
 class TeachersList extends Component {
@@ -10,7 +10,7 @@ class TeachersList extends Component {
   };
 
   handleClick = () => {
-    this.props.loadSocket();
+    this.props.loadTeachers();
   };
 
   render() {

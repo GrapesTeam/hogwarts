@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import auth from 'Auth/module/auth';
-import teachers from 'Teachers/module/teachers';
-import locale from 'App/module/locale';
+import auth from 'Auth/authModule';
+import teachers from 'Teachers/teachersModule';
+import locale from 'App/localeModule';
 
 const reducers = combineReducers({
   locale,

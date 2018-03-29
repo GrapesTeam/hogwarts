@@ -9,14 +9,14 @@ const Profile = Loadable({
 
 export const ProfileTablet = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "/tablet/profile" */ './ProfileTablet'),
+    import(/* webpackChunkName: "/tablet/profile" */ './Tablet/ProfileTablet'),
   loading: Loading,
   delay: 200
 });
 
 export const ProfileMobile = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "/mobile/profile" */ './ProfileMobile'),
+    import(/* webpackChunkName: "/mobile/profile" */ './Mobile/ProfileMobile'),
   loading: Loading,
   delay: 200
 });

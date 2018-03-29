@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { RouteWithSubRoutes } from 'routes';
 import Header from './Header';
 import DevTools from 'DevTools/DevTools';
-import { actions as authActions } from 'Auth/module/auth';
-import { actions } from './module/locale';
+import { actions as authActions } from 'Auth/authModule';
+import { actions } from './localeModule';
 import './App.css';
 
 class App extends Component {

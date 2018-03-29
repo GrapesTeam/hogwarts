@@ -9,14 +9,14 @@ const Teacher = Loadable({
 
 export const TeacherTablet = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "/tablet/teacher" */ './TeacherTablet'),
+    import(/* webpackChunkName: "/tablet/teacher" */ './Tablet/TeacherTablet'),
   loading: Loading,
   delay: 200
 });
 
 export const TeacherMobile = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "/mobile/teacher" */ './TeacherMobile'),
+    import(/* webpackChunkName: "/mobile/teacher" */ './Mobile/TeacherMobile'),
   loading: Loading,
   delay: 200
 });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from 'Auth/module/auth';
+import { actions } from './authModule';
 import GeeTest from 'Common/GeeTest';
 import InputField from 'Common/InputField';
 import WithLoginProps from './WithLoginProps';

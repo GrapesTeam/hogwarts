@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import GeeTest from 'Common/GeeTest';
-import { actions } from 'Auth/module/auth';
-import WithLoginProps from './WithLoginProps';
+import { actions } from '../authModule';
+import WithLoginProps from '../WithLoginProps';
 import InputField from 'Common/InputField';
 
 class LoginTablet extends Component {
