@@ -1,0 +1,29 @@
+image: node:9.9.0-alpine
+
+variables:
+  CI: "true"
+
+
+before_script:
+  - npm install
+
+after_script:
+  - node -v
+  - npm -v
+
+stages:
+  - test
+  - build-com
+
+job1:
+  stage: test
+    
+  script:
+    - npm test
+    
+
+job2:
+  stage: build-com
+
+  script:
+    - npm run-script build-com
