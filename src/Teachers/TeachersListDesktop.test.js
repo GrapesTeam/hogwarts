@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { MemoryRouter } from 'react-router-dom';
-import TeachersList from 'Teachers/TeachersList/TeachersList';
+import TeachersList from 'Teachers/TeachersListDesktop';
 import TeacherCard from 'Teachers/TeacherCard';
 
 const teachers = {
@@ -20,7 +20,7 @@ const teachers = {
   ]
 };
 const mockStore = configureMockStore();
-jest.mock('../module/teachers', () => ({
+jest.mock('./teachersModule', () => ({
   actions: {
     loadTeachers: () => ({
       type: 'LOAD_TEACHERS'

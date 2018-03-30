@@ -45,6 +45,33 @@ exports[`Button renders main button correctly 1`] = `
 </button>
 `;
 
+exports[`Button renders medium size button correctly 1`] = `
+<button
+  className="btn-default btn-medium"
+  type="button"
+>
+  Medium size
+</button>
+`;
+
+exports[`Button renders small size button correctly 1`] = `
+<button
+  className="btn-default btn-small"
+  type="button"
+>
+  Small size
+</button>
+`;
+
+exports[`Button renders standard size button correctly 1`] = `
+<button
+  className="btn-default btn-standard"
+  type="button"
+>
+  Standard size
+</button>
+`;
+
 exports[`Button renders success button correctly 1`] = `
 <button
   className="btn-success btn-standard"

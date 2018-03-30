@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch } from 'react-router-dom';
-import { RouteWithSubRoutes } from 'routes';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { RouteWithSubRoutes } from 'routes';
 import Header from './Header';
+import DevTools from 'DevTools/DevTools';
+import { actions as authActions } from 'Auth/authModule';
 import { actions } from './localeModule';
 import './App.css';
 
@@ -31,18 +33,20 @@ class App extends Component {
   }
 
   render() {
-    const { auth, lang, routes, switchLan } = this.props;
+    const { auth, device, lang, routes, switchLan } = this.props;
 
     return (
       <div className="App">
         <Header isLogin={auth.isLogin} lang={lang} switchLan={switchLan} />
+        cn
         <div className="container">
           <Switch>
             {routes.map((route, i) => (
-              <RouteWithSubRoutes key={i} {...route} />
+              <RouteWithSubRoutes key={i} {...route} device={device} />
             ))}
           </Switch>
         </div>
+        {window.__REDUX_DEVTOOLS_EXTENSION__ ? null : <DevTools />}
       </div>
     );
   }
@@ -54,7 +58,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  ...actions
+  ...actions,
+  ...authActions
 };
 
 export default compose(

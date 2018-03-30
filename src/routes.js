@@ -7,15 +7,14 @@ import Login, { LoginTablet, LoginMobile } from 'Auth/Login';
 import Profile, { ProfileTablet, ProfileMobile } from 'Profile';
 import SignUp, { SignUpTablet, SignUpMobile } from 'Auth/SignUp';
 import Teachers from 'Teachers';
-import device from 'current-device';
 
 export const RouteWithSubRoutes = route => (
   <Route
     {...route}
     render={props => {
       let Component = route.desktop;
-      if (device.type === 'tablet') Component = route.tablet;
-      if (device.type === 'mobile') Component = route.mobile;
+      if (route.device === 'tablet') Component = route.tablet;
+      if (route.device === 'mobile') Component = route.mobile;
       if (route.protected) {
         return <ProtectedRoute {...props} component={Component} />;
       } else if (route.public) {

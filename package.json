@@ -23,8 +23,10 @@
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start-com": "REACT_APP_WEBSITE=com react-scripts start",
+    "start-cn": "REACT_APP_WEBSITE=cn react-scripts start",
+    "build-com": "REACT_APP_WEBSITE=com react-scripts build",
+    "build-cn": "REACT_APP_WEBSITE=cn react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
@@ -55,7 +57,8 @@
       "src/**/*.{js,jsx}",
       "!src/**/index.js",
       "!<rootDir>/node_modules/",
-      "!<rootDir>/path/to/dir/"
+      "!<rootDir>/path/to/dir/",
+      "!src/registerServiceWorker.js"
     ],
     "coverageThreshold": {
       "global": {

@@ -53,7 +53,7 @@ class TeachersPage extends Component {
       <div className="teachers">
         <Switch location={isModal ? this.previousLocation : location}>
           {this.routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
+            <RouteWithSubRoutes key={i} {...route} device={this.context.device} />
           ))}
         </Switch>
         {isModal ? (

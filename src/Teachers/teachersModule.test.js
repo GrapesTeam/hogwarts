@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
-import reducer, { actions, actionTypes } from './teachers';
-import createMiddleware from 'store/createMiddelware';
+import reducer, { actions, actionTypes } from './teachersModule';
+import createMiddleware from 'store/createMiddleware';
 import api from 'api';
 
 const mock = new MockAdapter(api);

@@ -33,15 +33,16 @@ class App extends Component {
   }
 
   render() {
-    const { auth, lang, routes, switchLan } = this.props;
+    const { auth, device, lang, routes, switchLan } = this.props;
 
     return (
       <div className="App">
         <Header isLogin={auth.isLogin} lang={lang} switchLan={switchLan} />
+        com
         <div className="container">
           <Switch>
             {routes.map((route, i) => (
-              <RouteWithSubRoutes key={i} {...route} />
+              <RouteWithSubRoutes key={i} {...route} device={device} />
             ))}
           </Switch>
         </div>
