@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders big size button correctly 1`] = `
+<button
+  className="btn-default btn-big"
+  type="button"
+>
+  Big size
+</button>
+`;
+
+exports[`Button renders correctly 1`] = `
+<button
+  className="btn-default btn-standard"
+  type="button"
+>
+  Default
+</button>
+`;
+
+exports[`Button renders error button correctly 1`] = `
+<button
+  className="btn-error btn-standard"
+  type="button"
+>
+  Error
+</button>
+`;
+
+exports[`Button renders instant-tutoring button correctly 1`] = `
+<button
+  className="btn-instant-tutoring btn-standard"
+  type="button"
+>
+  Instant Tutoring
+</button>
+`;
+
+exports[`Button renders main button correctly 1`] = `
+<button
+  className="btn-main btn-standard"
+  type="button"
+>
+  Main
+</button>
+`;
+
+exports[`Button renders success button correctly 1`] = `
+<button
+  className="btn-success btn-standard"
+  type="button"
+>
+  Success
+</button>
+`;
