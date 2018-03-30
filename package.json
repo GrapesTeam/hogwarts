@@ -30,7 +30,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "prettier": "node ./scripts/prettier/index.js write-changed",
+    "prettier-all": "node ./scripts/prettier/index.js write"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.15",
