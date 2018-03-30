@@ -5,11 +5,10 @@ import { action, decorateAction } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import InputField from '../Common/InputField';
-import Button from '../Common/Button';
+import Button from '../italki-ui/Button';
 
 const firstArgAction = decorateAction([
   args => {
-    console.log(args)
     return args.slice(0, 1)
   }
 ]);
