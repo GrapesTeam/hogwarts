@@ -4,7 +4,7 @@ import KeyMirror from 'until/keyMirror';
 export const actionTypes = KeyMirror({
   LOCALE_REQUEST: null,
   LOCALE_SUCCESS: null,
-  LOCALE_FAILURE: null
+  LOCALE_FAILURE: null,
 });
 
 const locale = (state = {}, action) => {
@@ -13,7 +13,7 @@ const locale = (state = {}, action) => {
       return {
         ...state,
         lang: action.locale.lang,
-        messages: action.locale.translations
+        messages: action.locale.translations,
       };
     default:
       return state;
@@ -42,13 +42,13 @@ export const actions = {
         addLocaleData(localeData);
         dispatch({
           type: actionTypes.LOCALE_SUCCESS,
-          locale: { lang, translations }
+          locale: { lang, translations },
         });
       } catch (err) {
         dispatch({ type: actionTypes.LOCALE_FAILURE });
       }
     };
-  }
+  },
 };
 
 export default locale;

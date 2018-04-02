@@ -23,8 +23,10 @@
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
+    "start": "react-scripts start",
     "start-com": "REACT_APP_WEBSITE=com react-scripts start",
     "start-cn": "REACT_APP_WEBSITE=cn react-scripts start",
+    "build": "react-scripts build",
     "build-com": "REACT_APP_WEBSITE=com react-scripts build",
     "build-cn": "REACT_APP_WEBSITE=cn react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -32,7 +34,14 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "prettier": "node ./scripts/prettier/index.js write-changed",
-    "prettier-all": "node ./scripts/prettier/index.js write"
+    "prettier-all": "node ./scripts/prettier/index.js write",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,css}": [
+      "npm run prettier",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.15",
@@ -44,6 +53,7 @@
     "babel-core": "^6.26.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "husky": "^0.14.3",
     "jest-enzyme": "^6.0.0",
     "prettier": "1.11.1",
     "react-test-renderer": "^16.3.0",

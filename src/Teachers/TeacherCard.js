@@ -8,9 +8,8 @@ const TeacherCard = ({ id, nickname, oms_apply_video_url }) => (
     <Link
       to={{
         pathname: `/teacher/${id}`,
-        state: { modal: true }
-      }}
-    >
+        state: { modal: true },
+      }}>
       <p>{nickname}</p>
     </Link>
     {oms_apply_video_url ? <Video url={oms_apply_video_url} /> : 'no video'}
@@ -20,7 +19,7 @@ const TeacherCard = ({ id, nickname, oms_apply_video_url }) => (
 TeacherCard.prototype = {
   id: PropTypes.number.isRequired,
   nickname: PropTypes.string.isRequired,
-  oms_apply_video_url: PropTypes.string
+  oms_apply_video_url: PropTypes.string,
 };
 
 export default TeacherCard;

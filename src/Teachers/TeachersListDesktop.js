@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 class TeachersList extends Component {
   static propTypes = {
-    teachers: PropTypes.object.isRequired
+    teachers: PropTypes.object.isRequired,
   };
 
   handleClick = () => {
@@ -27,11 +27,11 @@ class TeachersList extends Component {
 }
 
 const mapStateToProps = state => ({
-  teachers: state.teachers
+  teachers: state.teachers,
 });
 
 const mapDispatchToProps = {
-  ...actions
+  ...actions,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeachersList);

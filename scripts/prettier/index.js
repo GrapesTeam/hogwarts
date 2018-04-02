@@ -23,9 +23,8 @@ const onlyChanged = mode === 'check-changed' || mode === 'write-changed';
 const changedFiles = onlyChanged ? listChangedFiles() : null;
 let didWarn = false;
 let didError = false;
-
 const files = glob
-  .sync('**/*.js', {ignore: '**/node_modules/**'})
+  .sync('src/**/*.{js,jsx,css}', { ignore: '**/node_modules/**' })
   .filter(f => !onlyChanged || changedFiles.has(f));
 
 if (!files.length) {
@@ -41,6 +40,7 @@ files.forEach(file => {
     if (shouldWrite) {
       const output = prettier.format(input, options);
       if (output !== input) {
+        console.log(chalk.green(`${file}`));
         fs.writeFileSync(file, output, 'utf8');
       }
     } else {

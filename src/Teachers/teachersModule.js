@@ -3,27 +3,27 @@ import KeyMirror from 'until/keyMirror';
 export const actionTypes = KeyMirror({
   TEACHERS_REQUEST: null,
   TEACHERS_SUCCESS: null,
-  TEACHERS_FAILURE: null
+  TEACHERS_FAILURE: null,
 });
 
 const initialState = {
-  data: []
+  data: [],
 };
 
 const teachers = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TEACHERS_REQUEST:
       return {
-        ...state
+        ...state,
       };
     case actionTypes.TEACHERS_SUCCESS:
       return {
         ...state,
-        data: action.response.data
+        data: action.response.data,
       };
     case actionTypes.TEACHERS_FAILURE:
       return {
-        ...state
+        ...state,
       };
     default:
       return state;
@@ -36,11 +36,11 @@ export const actions = {
       types: [
         actionTypes.TEACHERS_REQUEST,
         actionTypes.TEACHERS_SUCCESS,
-        actionTypes.TEACHERS_FAILURE
+        actionTypes.TEACHERS_FAILURE,
       ],
-      promise: api => api.get('/teachersv2')
+      promise: api => api.get('/teachersv2'),
     };
-  }
+  },
 };
 
 export default teachers;

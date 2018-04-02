@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { RouteWithSubRoutes } from 'routes';
 import TeachersList, {
   TeachersListTablet,
-  TeachersListMobile
+  TeachersListMobile,
 } from './TeachersList';
 import Teacher, { TeacherTablet, TeacherMobile } from 'Teacher';
 
@@ -16,19 +16,19 @@ class TeachersPage extends Component {
       path: '/teachers',
       desktop: TeachersList,
       tablet: TeachersListTablet,
-      mobile: TeachersListMobile
+      mobile: TeachersListMobile,
     },
     {
       exact: true,
       path: '/teacher/:id',
       desktop: Teacher,
       tablet: TeacherTablet,
-      mobile: TeacherMobile
-    }
+      mobile: TeacherMobile,
+    },
   ];
 
   static contextTypes = {
-    device: PropTypes.string
+    device: PropTypes.string,
   };
 
   componentWillUpdate(nextProps) {
@@ -53,7 +53,11 @@ class TeachersPage extends Component {
       <div className="teachers">
         <Switch location={isModal ? this.previousLocation : location}>
           {this.routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} device={this.context.device} />
+            <RouteWithSubRoutes
+              key={i}
+              {...route}
+              device={this.context.device}
+            />
           ))}
         </Switch>
         {isModal ? (
@@ -81,9 +85,8 @@ const Modal = ({ history, route }) => {
         left: 0,
         bottom: 0,
         right: 0,
-        background: 'rgba(0, 0, 0, 0.15)'
-      }}
-    >
+        background: 'rgba(0, 0, 0, 0.15)',
+      }}>
       <div
         className="modal"
         style={{
@@ -93,9 +96,8 @@ const Modal = ({ history, route }) => {
           left: '10%',
           right: '10%',
           padding: 15,
-          border: '2px solid #444'
-        }}
-      >
+          border: '2px solid #444',
+        }}>
         <RouteWithSubRoutes {...route} />
         <button type="button" onClick={back}>
           Close

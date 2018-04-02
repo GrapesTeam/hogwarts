@@ -4,6 +4,7 @@ import reducer, { actions, actionTypes } from './teachersModule';
 import createMiddleware from 'store/createMiddleware';
 import api from 'api';
 
+const REQUEST_FAILURE = 'REQUEST_FAILURE';
 const mock = new MockAdapter(api);
 const middlewares = [createMiddleware(api)];
 const mockStore = configureMockStore(middlewares);
@@ -13,7 +14,7 @@ describe('actions', () => {
     const store = mockStore({ data: {} });
     const expectedAction = [
       actionTypes.TEACHERS_REQUEST,
-      actionTypes.TEACHERS_SUCCESS
+      actionTypes.TEACHERS_SUCCESS,
     ];
     mock.onGet('/teachersv2').reply(200, {});
     store.dispatch(actions.loadTeachers()).then(() => {
@@ -27,7 +28,8 @@ describe('actions', () => {
     const store = mockStore({ data: {} });
     const expectedAction = [
       actionTypes.TEACHERS_REQUEST,
-      actionTypes.TEACHERS_FAILURE
+      REQUEST_FAILURE,
+      actionTypes.TEACHERS_FAILURE,
     ];
     mock.onGet('/teachersv2').reply(400, {});
     store.dispatch(actions.loadTeachers()).then(() => {
@@ -44,7 +46,9 @@ describe('actions', () => {
   it('should handle TEACHERS_REQUEST', () => {
     expect(
       reducer({ data: [] }, { type: actionTypes.TEACHERS_REQUEST })
-    ).toEqual({ data: [] });
+    ).toEqual({
+      data: [],
+    });
     expect(
       reducer(
         {},
@@ -53,6 +57,8 @@ describe('actions', () => {
     ).toEqual({ data: [] });
     expect(
       reducer({ data: [] }, { type: actionTypes.TEACHERS_FAILURE })
-    ).toEqual({ data: [] });
+    ).toEqual({
+      data: [],
+    });
   });
 });

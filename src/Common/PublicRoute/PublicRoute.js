@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 class PublicRoute extends Component {
   static propTypes = {
     isLogin: PropTypes.bool.isRequired,
-    component: PropTypes.func.isRequired
+    component: PropTypes.func.isRequired,
   };
 
   render() {
@@ -20,13 +20,17 @@ class PublicRoute extends Component {
           if (!isLogin && !token) {
             return <Component {...props} />;
           }
-          
+
           if (!isLogin && token) {
-            return (<p>logining now</p>)
+            return <p>logining now</p>;
           }
 
           if (isLogin) {
-            return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+            return (
+              <Redirect
+                to={{ pathname: '/', state: { from: props.location } }}
+              />
+            );
           }
         }}
       />
@@ -35,7 +39,7 @@ class PublicRoute extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLogin: state.auth.isLogin
+  isLogin: state.auth.isLogin,
 });
 
 export default connect(mapStateToProps)(PublicRoute);

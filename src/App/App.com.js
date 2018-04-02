@@ -5,23 +5,22 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { RouteWithSubRoutes } from 'routes';
 import Header from './Header';
-import DevTools from 'DevTools/DevTools';
 import { actions as authActions } from 'Auth/authModule';
 import { actions } from './localeModule';
 import './App.css';
 
 class App extends Component {
   static defaultProps = {
-    routes: []
+    routes: [],
   };
 
   static childContextTypes = {
-    device: PropTypes.string.isRequired
+    device: PropTypes.string.isRequired,
   };
 
   getChildContext() {
     return {
-      device: this.props.device
+      device: this.props.device,
     };
   }
 
@@ -34,11 +33,10 @@ class App extends Component {
 
   render() {
     const { auth, device, lang, routes, switchLan } = this.props;
-
     return (
       <div className="App">
         <Header isLogin={auth.isLogin} lang={lang} switchLan={switchLan} />
-        cn
+        com
         <div className="container">
           <Switch>
             {routes.map((route, i) => (
@@ -46,7 +44,6 @@ class App extends Component {
             ))}
           </Switch>
         </div>
-        {window.__REDUX_DEVTOOLS_EXTENSION__ ? null : <DevTools />}
       </div>
     );
   }
@@ -54,15 +51,39 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  lang: state.locale.lang
+  lang: state.locale.lang,
 });
 
 const mapDispatchToProps = {
   ...actions,
-  ...authActions
+  ...authActions,
 };
 
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
-)(App);
+let AppEnhancer;
+if (process.env.NODE_ENV === 'production') {
+  AppEnhancer = compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+  )(App);
+} else {
+  const DebugTool = WrappedComponent =>
+    class extends Component {
+      render() {
+        const DevTools = require('DevTools/DevTools').default;
+        return (
+          <div>
+            <WrappedComponent {...this.props} />
+            {window.__REDUX_DEVTOOLS_EXTENSION__ ? null : <DevTools />}
+          </div>
+        );
+      }
+    };
+
+  AppEnhancer = compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps),
+    DebugTool
+  )(App);
+}
+
+export default AppEnhancer;

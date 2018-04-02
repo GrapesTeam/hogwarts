@@ -12,7 +12,7 @@ class LoginTablet extends Component {
     captcha: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
   };
 
   handleClick = () => {
@@ -46,13 +46,11 @@ class LoginTablet extends Component {
             this.geeTest = instance;
           }}
           data={auth.captcha}
-          onSuccess={handleLogin}
-        >
+          onSuccess={handleLogin}>
           <button
             disabled={!auth.captchaReady}
             type="button"
-            onClick={this.handleClick}
-          >
+            onClick={this.handleClick}>
             login
           </button>
         </GeeTest>
@@ -62,11 +60,11 @@ class LoginTablet extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 const mapDispatchToProps = {
-  ...actions
+  ...actions,
 };
 
 export default compose(

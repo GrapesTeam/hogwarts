@@ -2,7 +2,9 @@ import io from 'socket.io-client';
 
 const socket = {
   open(store) {
-    this.socketClient = io(`${process.env.REACT_APP_API_URL_DEV}/message/ws-poll`);
+    this.socketClient = io(
+      `${process.env.REACT_APP_API_URL_DEV}/message/ws-poll`
+    );
   },
 
   send(data, dispatch) {
@@ -15,7 +17,7 @@ const socket = {
 
   close() {
     this.socketClient.close();
-  }
-}
+  },
+};
 
 export default socket;

@@ -26,7 +26,7 @@ const WithLoginProps = WrappedComponent =>
     updateValue = newValue => {
       this.formData = {
         ...this.formData,
-        ...newValue
+        ...newValue,
       };
     };
 
@@ -34,7 +34,7 @@ const WithLoginProps = WrappedComponent =>
       this.props.login({
         ...captcha,
         LOGIN_PA_USERNAME: this.formData.email,
-        LOGIN_PA_PASSWORD: this.formData.password
+        LOGIN_PA_PASSWORD: this.formData.password,
       });
     };
 

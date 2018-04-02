@@ -6,7 +6,7 @@ import locale from 'App/localeModule';
 const reducers = combineReducers({
   locale,
   auth,
-  teachers
+  teachers,
 });
 
 export default reducers;

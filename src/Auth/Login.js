@@ -4,19 +4,21 @@ import Loading from 'Common/Loading';
 const Login = Loadable({
   loader: () => import(/* webpackChunkName: "login" */ './LoginDesktop'),
   loading: Loading,
-  delay: 200
+  delay: 200,
 });
 
 export const LoginTablet = Loadable({
-  loader: () => import(/* webpackChunkName: "/tablet/login" */ './Tablet/LoginTablet'),
+  loader: () =>
+    import(/* webpackChunkName: "/tablet/login" */ './Tablet/LoginTablet'),
   loading: Loading,
-  delay: 200
+  delay: 200,
 });
 
 export const LoginMobile = Loadable({
-  loader: () => import(/* webpackChunkName: "/mobile/login" */ './Mobile/LoginMobile'),
+  loader: () =>
+    import(/* webpackChunkName: "/mobile/login" */ './Mobile/LoginMobile'),
   loading: Loading,
-  delay: 200
+  delay: 200,
 });
 
 export default Login;

@@ -26,7 +26,7 @@ const WithSignUp = WrappedComponent =>
     updateValue = newValue => {
       this.formData = {
         ...this.formData,
-        ...newValue
+        ...newValue,
       };
     };
 
@@ -35,7 +35,7 @@ const WithSignUp = WrappedComponent =>
         ...captcha,
         nickname: this.formData.nickname,
         email: this.formData.email,
-        password: this.formData.password
+        password: this.formData.password,
       });
     };
 

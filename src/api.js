@@ -3,13 +3,13 @@ import qs from 'qs';
 
 const api = axios.create({
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
   },
   transformRequest: [
     (data, headers) => {
       return qs.stringify(data);
-    }
-  ]
+    },
+  ],
 });
 
 if (process.env.NODE_ENV === 'production') {

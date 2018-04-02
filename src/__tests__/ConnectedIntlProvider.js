@@ -6,7 +6,7 @@ import ConnectedIntlProvider from 'ConnectedIntlProvider';
 
 it('should have render correctly', () => {
   const mockStore = configureMockStore();
-  const store = mockStore({ locale: { lang: 'en', messages: {} }});
+  const store = mockStore({ locale: { lang: 'en', messages: {} } });
   mount(
     <Provider store={store}>
       <ConnectedIntlProvider>

@@ -5,19 +5,15 @@ import Button from './Button';
 
 describe('Button', () => {
   it('renders correctly', () => {
-    const tree = renderer
-      .create(<Button>Default</Button>)
-      .toJSON();
+    const tree = renderer.create(<Button>Default</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
-  
+
   it('renders main button correctly', () => {
-    const tree = renderer
-      .create(<Button iistyle="main">Main</Button>)
-      .toJSON();
+    const tree = renderer.create(<Button iistyle="main">Main</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
-  
+
   it('renders error button correctly', () => {
     const tree = renderer
       .create(<Button iistyle="error">Error</Button>)
@@ -40,9 +36,7 @@ describe('Button', () => {
   });
 
   it('renders big size button correctly', () => {
-    const tree = renderer
-      .create(<Button size="big">Big size</Button>)
-      .toJSON();
+    const tree = renderer.create(<Button size="big">Big size</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

@@ -9,7 +9,7 @@ class SignUpTablet extends Component {
     captcha: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
   };
 
   componentWillMount() {
@@ -40,7 +40,7 @@ class SignUpTablet extends Component {
       ...captcha,
       nickname: this.refs.nickname.value,
       email: this.refs.email.value,
-      password: this.refs.password.value
+      password: this.refs.password.value,
     });
   };
 
@@ -82,13 +82,11 @@ class SignUpTablet extends Component {
             this.geeTest = instance;
           }}
           data={auth.captcha}
-          onSuccess={this.handleSignUp}
-        >
+          onSuccess={this.handleSignUp}>
           <button
             disabled={!auth.captchaReady}
             type="button"
-            onClick={this.handleClick}
-          >
+            onClick={this.handleClick}>
             Sign Up
           </button>
         </GeeTest>
@@ -98,11 +96,11 @@ class SignUpTablet extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 const mapDispatchToProps = {
-  ...actions
+  ...actions,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpTablet);

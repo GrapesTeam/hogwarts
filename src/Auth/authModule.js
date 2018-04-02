@@ -6,14 +6,14 @@ export const actionTypes = KeyMirror({
   LOGIN_FAILURE: null,
   CAPTCHA_REQUEST: null,
   CAPTCHA_SUCCESS: null,
-  CAPTCHA_FAILURE: null
+  CAPTCHA_FAILURE: null,
 });
 
 const auth = (state = { isLogin: false }, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_REQUEST: {
       return {
-        ...state
+        ...state,
       };
     }
     case actionTypes.LOGIN_SUCCESS: {
@@ -22,31 +22,31 @@ const auth = (state = { isLogin: false }, action) => {
       return {
         ...state,
         isLogin: true,
-        user: action.response.data
+        user: action.response.data,
       };
     }
     case actionTypes.LOGIN_FAILURE: {
       localStorage.removeItem('kp.token');
       localStorage.removeItem('kp.vtoken');
       return {
-        ...state
+        ...state,
       };
     }
     case actionTypes.CAPTCHA_REQUEST: {
       return {
-        ...state
+        ...state,
       };
     }
     case actionTypes.CAPTCHA_SUCCESS: {
       return {
         ...state,
         captchaReady: true,
-        captcha: action.response
+        captcha: action.response,
       };
     }
     case actionTypes.CAPTCHA_FAILURE: {
       return {
-        ...state
+        ...state,
       };
     }
     default:
@@ -60,33 +60,33 @@ export const actions = {
       types: [
         actionTypes.CAPTCHA_REQUEST,
         actionTypes.CAPTCHA_SUCCESS,
-        actionTypes.CAPTCHA_FAILURE
+        actionTypes.CAPTCHA_FAILURE,
       ],
-      promise: api => api.get('/geetest/captcha')
+      promise: api => api.get('/geetest/captcha'),
     };
   },
-  
+
   login(payload) {
     return {
       types: [
         actionTypes.LOGIN_REQUEST,
         actionTypes.LOGIN_SUCCESS,
-        actionTypes.LOGIN_FAILURE
+        actionTypes.LOGIN_FAILURE,
       ],
-      promise: api => api.post('/login', payload)
+      promise: api => api.post('/login', payload),
     };
   },
-  
+
   signUp(payload) {
     return {
       types: [
         actionTypes.LOGIN_REQUEST,
         actionTypes.LOGIN_SUCCESS,
-        actionTypes.LOGIN_FAILURE
+        actionTypes.LOGIN_FAILURE,
       ],
-      promise: api => api.post('/account/register', payload)
+      promise: api => api.post('/account/register', payload),
     };
-  }
+  },
 };
 
 export default auth;

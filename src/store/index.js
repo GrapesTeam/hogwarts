@@ -29,7 +29,7 @@ async function loadLocale() {
 
   return {
     lang: newlanguage,
-    messages: translations
+    messages: translations,
   };
 }
 

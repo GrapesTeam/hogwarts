@@ -31,33 +31,33 @@ const routes = [
     path: '/teacher*',
     desktop: Teachers,
     mobile: Teachers,
-    tablet: Teachers
+    tablet: Teachers,
   },
   {
     path: '/landing',
     desktop: Landing,
     mobile: LandingMobile,
-    tablet: LandingTablet
+    tablet: LandingTablet,
   },
   {
     path: '/login',
     desktop: Login,
     mobile: LoginMobile,
-    tablet: LoginTablet
+    tablet: LoginTablet,
   },
   {
     path: '/profile',
     desktop: Profile,
     mobile: ProfileMobile,
     tablet: ProfileTablet,
-    protected: true
+    protected: true,
   },
   {
     path: '/signup',
     desktop: SignUp,
     mobile: SignUpMobile,
-    tablet: SignUpTablet
-  }
+    tablet: SignUpTablet,
+  },
 ];
 
 export default routes;

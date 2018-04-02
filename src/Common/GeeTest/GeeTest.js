@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class GeeTest extends PureComponent {
   static propTypes = {
     data: PropTypes.object,
-    onSuccess: PropTypes.func.isRequired
+    onSuccess: PropTypes.func.isRequired,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -17,7 +17,7 @@ class GeeTest extends PureComponent {
           offline: !data.success,
           new_captcha: data.new_captcha,
           product: 'bind',
-          width: '300px'
+          width: '300px',
         },
         captchaObj => {
           captchaObj.onReady(() => {
@@ -26,7 +26,7 @@ class GeeTest extends PureComponent {
           captchaObj.onSuccess(function() {
             const result = {
               ...captchaObj.getValidate(),
-              'g-recaptcha-response': process.env.REACT_APP_GEE_TEST
+              'g-recaptcha-response': process.env.REACT_APP_GEE_TEST,
             };
             onSuccess(result);
           });

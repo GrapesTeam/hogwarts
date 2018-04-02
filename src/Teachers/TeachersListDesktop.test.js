@@ -11,30 +11,30 @@ const teachers = {
     {
       id: 1,
       nickname: 'jack',
-      oms_apply_video_url: 'video url'
+      oms_apply_video_url: 'video url',
     },
     {
       id: 2,
-      nickname: 'jack'
-    }
-  ]
+      nickname: 'jack',
+    },
+  ],
 };
 const mockStore = configureMockStore();
 jest.mock('./teachersModule', () => ({
   actions: {
     loadTeachers: () => ({
-      type: 'LOAD_TEACHERS'
-    })
-  }
-}))
+      type: 'LOAD_TEACHERS',
+    }),
+  },
+}));
 
 describe('Teachers page', () => {
-  let store
+  let store;
   beforeEach(() => {
     store = mockStore({
-      teachers
-    })
-  })
+      teachers,
+    });
+  });
 
   it('should load teachers after click', () => {
     const wrapper = mount(
@@ -45,7 +45,7 @@ describe('Teachers page', () => {
       </Provider>
     );
     wrapper.find('button').simulate('click');
-    expect(store.getActions()).toEqual([{"type": "LOAD_TEACHERS"}]);
+    expect(store.getActions()).toEqual([{ type: 'LOAD_TEACHERS' }]);
   });
 
   it('should add teachers card list', () => {

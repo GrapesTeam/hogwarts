@@ -12,7 +12,7 @@ class SignUp extends Component {
     captcha: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
   };
 
   handleClick = () => {
@@ -61,13 +61,11 @@ class SignUp extends Component {
             this.geeTest = instance;
           }}
           data={auth.captcha}
-          onSuccess={this.props.handleSignUp}
-        >
+          onSuccess={this.props.handleSignUp}>
           <button
             disabled={!auth.captchaReady}
             type="button"
-            onClick={this.handleClick}
-          >
+            onClick={this.handleClick}>
             Sign Up
           </button>
         </GeeTest>
@@ -77,11 +75,11 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 const mapDispatchToProps = {
-  ...actions
+  ...actions,
 };
 
 export default compose(

@@ -23,13 +23,13 @@ class Header extends PureComponent {
     { value: 'pl', name: 'Polski' },
     { value: 'th', name: 'ไทย' },
     { value: 'tr', name: 'Türkçe' },
-    { value: 'vi', name: 'Tiếng Việt' }
+    { value: 'vi', name: 'Tiếng Việt' },
   ];
 
   static propTypes = {
     isLogin: PropTypes.bool,
     lang: PropTypes.string,
-    switchLan: PropTypes.func
+    switchLan: PropTypes.func,
   };
 
   handleChange = () => {
@@ -66,8 +66,7 @@ class Header extends PureComponent {
         <select
           defaultValue={lang}
           onChange={this.handleChange}
-          ref={instance => (this.selectInstance = instance)}
-        >
+          ref={instance => (this.selectInstance = instance)}>
           {this.languages.map((l, i) => (
             <option key={i} value={l.value}>
               {l.name}
