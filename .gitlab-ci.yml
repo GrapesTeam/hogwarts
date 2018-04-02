@@ -27,3 +27,9 @@ job2:
 
   script:
     - npm run-script build-com
+
+job3:
+  stage: build-cn
+
+  script:
+    - npm run-script build-cn
