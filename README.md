@@ -23,7 +23,7 @@
 ## 目录结构
 
 ```
-my-app/
+italki-react-starter/
   README.md
   node_modules/
   package.json
@@ -31,11 +31,14 @@ my-app/
     index.html
     favicon.ico
   src/
+    __tests__
     App/
       Page/
         Page.css
         Page.js
         Page.test.js
+        pageModdule.js
+        pageModdule.test.js
         ComponentA/
           ComponentA.css
           ComponentA.js
@@ -65,16 +68,46 @@ Webpack会自动处理保存于`src`文件夹中的**JS和CSS文件**，如果�
 ## Npm命令
 ### `npm start`
 
-启动开发服务器。[http://127.0.0.1:9000](http://127.0.0.1:9000)<br>
-页面会重新加载如果有任何修改。
+需要提供环境变量REACT_APP_WEBSITE=com / REACT_APP_WEBSITE=cn 启动开发服务器。[http://127.0.0.1:9000](http://127.0.0.1:9000)<br>
+
+#### Mac / Linux
+
+```sh
+REACT_APP_WEBSITE=com npm start
+REACT_APP_WEBSITE=cn npm start
+```
+
+#### Windows(command)
+
+```cmd
+set "REACT_APP_SECRET_CODE=abcdef" && npm start
+```
+
+#### Windows(Powershell)
+
+```powershell
+($env:REACT_APP_SECRET_CODE = "abcdef") -and (npm start)
+```
+
+### `npm run start-cn`
+
+启动CN开发服务器, 该命令在windows下无法执行
+
+### `npm run start-cn`
+
+启动COM开发服务器, 该命令在windows下无法执行
 
 ### `npm test`
 
 运行测试
+
+### `npm test -- --coverage`
+
+生成覆盖率报告
 
 ### `npm run build`
 
-生成`build`文件夹，为发布做准备
+需要提供环境变量REACT_APP_WEBSITE=com / REACT_APP_WEBSITE=cn，生成`build`文件夹，为发布做准备
 
 ## 支持的语法和Polyfills
 
@@ -172,6 +205,16 @@ class Button extends Component {
   }
 }
 ```
+
+## Storybook
+
+[Storybook](https://storybook.js.org/basics/introduction/) 是UI开发工具，通过它，可以直观的看到UI组件上各种不同状态的样式。
+
+### 启动Storybook
+
+```sh
+npm run storybook
+````
 
 ## Post-Processing CSS
 
