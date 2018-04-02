@@ -14,6 +14,7 @@ after_script:
 stages:
   - test
   - build-com
+  - build-cn
 
 job1:
   stage: test
