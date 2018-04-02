@@ -10,6 +10,14 @@ async function loadLocale() {
   let currentLanguage = localStorage.getItem('kp.hl');
   let language = currentLanguage || navigator.language;
   let newlanguage = language;
+  if (!window.Intl) {
+    await import(/* webpackChunkName: "/i18n/intlPolyfill" */ 'intl');
+    await import(/* webpackChunkName: "/i18n/polyfill/[request]_localePolyfill" */ `polyfill/${
+      language.indexOf('cn') !== -1 || language.indexOf('tw') !== -1
+        ? 'zh'
+        : language
+    }`);
+  }
   try {
     translations = await import(/* webpackChunkName: "/i18n/[request]" */ `i18n/${language}.json`);
     localeData = await import(/* webpackChunkName: "/i18n/locale/[request]_locale" */ `react-intl/locale-data/${

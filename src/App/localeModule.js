@@ -28,8 +28,12 @@ export const actions = {
         let newLang = lang;
         if (lang === 'zh-Hans') newLang = 'cn';
         if (lang === 'zh-Hant') newLang = 'tw';
+        if (!window.Intl) {
+          await import(/* webpackChunkName: "/i18n/intlPolyfill" */ 'intl');
+          await import(/* webpackChunkName: "/i18n/polyfill/[request]_localePolyfill" */ `polyfill/${lang}`);
+        }
         const translations = await import(/* webpackChunkName: "/i18n/[request]" */ `i18n/${newLang}.json`);
-        const localeData = await import(/* webpackChunkName: "/i18n/[request]_locale" */ `react-intl/locale-data/${
+        const localeData = await import(/* webpackChunkName: "/i18n/locale/[request]_locale" */ `react-intl/locale-data/${
           lang === 'zh-Hans' || lang === 'zh-Hant' ? 'zh' : lang
         }`);
         if (lang === 'zh-Hans') {
