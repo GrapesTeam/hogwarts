@@ -8,6 +8,7 @@
     "classnames": "^2.2.5",
     "current-device": "^0.7.2",
     "eslint-config-react-app": "^2.1.0",
+    "flow-bin": "^0.69.0",
     "intl": "^1.2.5",
     "js-cookie": "^2.2.0",
     "qs": "^6.5.1",
@@ -36,7 +37,8 @@
     "build-storybook": "build-storybook -s public",
     "prettier": "node ./scripts/prettier/index.js write-changed",
     "prettier-all": "node ./scripts/prettier/index.js write",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "flow": "flow"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,css}": [

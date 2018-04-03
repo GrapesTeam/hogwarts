@@ -5,8 +5,7 @@ module.exports = {
   printWidth: 80,
   overrides: [
     {
-      files:[
-        ],
+      files:[],
       options: {
         trailingComma: 'all',
       },
