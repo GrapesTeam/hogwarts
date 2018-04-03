@@ -24,7 +24,7 @@ const changedFiles = onlyChanged ? listChangedFiles() : null;
 let didWarn = false;
 let didError = false;
 const files = glob
-  .sync('src/**/*.{js,jsx,css}', { ignore: '**/node_modules/**' })
+  .sync('src/**/*.{js,jsx}', { ignore: '**/node_modules/**' })
   .filter(f => !onlyChanged || changedFiles.has(f));
 
 if (!files.length) {
