@@ -1,23 +1,50 @@
 .menu {
   position: relative;
-  display: inline-block;
   margin: 0;
   padding: 0;
   height: 42px;
   font-family: 'Roboto';
   font-size: 14px;
   border: solid 1px #cccccc;
+  border-radius: 2px 2px 0 0;
   cursor: pointer;
   user-select: none;
 }
 
+.menu input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border: 0;
+  padding: 0 38px 0 12px;
+  width: 100%;
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px;
+  box-sizing: border-box;
+}
+
+.menu input:focus {
+  outline: none;
+}
+
 .menu-hide {
+  border-radius: 2px;
   overflow: hidden;
   cursor: pointer;
 }
 
+.menu-hide input {
+  position: absolute;
+  left: -99999px;
+}
+
 .menu-title {
-  padding: 13px 28px 13px 12px;
+  padding: 13px 38px 13px 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .menu-items {
@@ -28,6 +55,7 @@
   max-height: 300px;
   overflow-y: scroll;
   border: solid 1px #cccccc;
+  border-radius: 0 0 2px 2px;
   transition: max-height 0.3s;
 }
 
@@ -36,8 +64,9 @@
 }
 
 .menu-item {
-  padding: 13px 9px;
-  height: 16px;
+  display: flex;
+  padding: 13px 12px;
+  min-height: 16px;
 }
 
 .menu-item:hover {
@@ -87,9 +116,10 @@
 }
 
 .checkmark {
+  display: flex;
   position: relative;
-  display: inline-block;
-  margin-right: 7px;
+  margin-right: 8px;
+  align-items: center;
 }
 .checkmark:after {
   content: "";

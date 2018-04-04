@@ -2,23 +2,33 @@
 import * as React from 'react';
 
 type Props = {
-  children: React.Node,
+  children?: React.Node,
   index: number,
   onClick: Function,
   actived: boolean,
+  value: string,
+  label: string,
 };
 
 class MenuItem extends React.Component<Props> {
+  static defaultProps = {
+    value: '',
+  };
+
   handleClick = () => {
-    this.props.onClick(this.props.index);
+    this.props.onClick({
+      index: this.props.index,
+      value: this.props.value,
+      label: this.props.label,
+    });
   };
 
   render() {
-    const { actived, children, setActive } = this.props;
+    const { actived, children } = this.props;
     return (
       <div className="menu-item" onClick={this.handleClick}>
-        {actived ? <div class="checkmark" /> : null}
-        {children}
+        {actived ? <div className="checkmark" /> : null}
+        <div>{children}</div>
       </div>
     );
   }
