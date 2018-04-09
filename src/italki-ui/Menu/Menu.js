@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
-import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
 import './menu.css';
 
 export const MenuContext = React.createContext({
+  label: '',
   selected: -1,
 });
 
 class Menu extends Component {
   static defaultProps = {
     search: false,
+    placeholder: 'Please select',
   };
 
   state = {
-    selected: -1,
+    selected: this.props.selected || -1,
     open: false,
     value: '',
     label: '',
+    searchText: '',
   };
 
   componentWillMount() {
     document.addEventListener('click', this.closeMenu);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.closeMenu);
   }
 
   closeMenu = event => {
@@ -50,7 +56,7 @@ class Menu extends Component {
     this.setState({
       ...this.state,
       open: true,
-      label: '',
+      searchText: '',
     });
   };
 
@@ -67,12 +73,12 @@ class Menu extends Component {
   handleInputChange = () => {
     this.setState({
       ...this.state,
-      label: this.search.value,
+      searchText: this.search.value,
     });
   };
 
   renderInput() {
-    const placeholder = this.placeholder || 'Hint text';
+    const placeholder = this.placeholder || this.props.placeholder;
     return (
       <input
         placeholder={placeholder}
@@ -83,8 +89,89 @@ class Menu extends Component {
     );
   }
 
+  renderChoice() {
+    const { children, placeholder } = this.props;
+    let choice;
+    const childrenArr = React.Children.toArray(children);
+    if (/^\d+G\d+$/.test(this.state.selected)) {
+      const groupIndex = this.state.selected.split('G')[0];
+      const choiceIndex = this.state.selected.split('G')[1];
+      choice =
+        childrenArr[groupIndex - 1] &&
+        childrenArr[groupIndex - 1].props.children[choiceIndex - 1] &&
+        childrenArr[groupIndex - 1].props.children[choiceIndex - 1].props
+          .children;
+    }
+    if (typeof this.state.selected === 'number') {
+      choice =
+        childrenArr[this.state.selected - 1] &&
+        childrenArr[this.state.selected - 1].props.children;
+    }
+    choice = choice || placeholder;
+    return choice;
+  }
+
+  checkChildren = child => {
+    if (child.props.children && typeof child.props.children !== 'string') {
+      return React.Children.forEach(child.props.children, this.checkChildren);
+    }
+    return (
+      child.props.children &&
+      child.props.children.indexOf(this.state.searchText) > -1
+    );
+  };
+
+  flatterned = [];
+  flattenChildren = children => {
+    React.Children.forEach(children, child => {
+      if (child.props.children && typeof child.props.children !== 'string') {
+        return React.Children.forEach(
+          child.props.children,
+          this.flattenChildren
+        );
+      }
+      this.flatterned.push(child.props.children);
+    });
+    return this.flatterned;
+  };
+
+  renderOptions() {
+    const { children } = this.props;
+    const { searchText } = this.state;
+
+    let noResults = true;
+    const flattenedChildren = this.flattenChildren(this.props.children);
+    for (let i = 0; i < flattenedChildren.length; i++) {
+      if (
+        flattenedChildren[i] &&
+        flattenedChildren[i].indexOf(this.state.searchText) > -1
+      ) {
+        noResults = false;
+        break;
+      }
+    }
+    const regx = new RegExp(searchText);
+    return noResults ? (
+      <MenuItem disabled>No Results</MenuItem>
+    ) : (
+      React.Children.map(
+        children,
+        (item, key) =>
+          item.type.name === 'EnhancedMenuGroup' ||
+          regx.test(flattenedChildren[key])
+            ? React.cloneElement(item, {
+                selected: this.state.selected,
+                index: key + 1,
+                setActive: this.setActive,
+                searchText,
+              })
+            : null
+      )
+    );
+  }
+
   render() {
-    const { children, classname, search, style } = this.props;
+    const { classname, search, style } = this.props;
     const { label, open, selected } = this.state;
     const classnames = cx('menu', classname, {
       'menu-hide': !open,
@@ -97,23 +184,12 @@ class Menu extends Component {
       <div className={classnames} style={style}>
         {search ? this.renderInput() : null}
         <div onClick={this.openMenu} className="menu-title">
-          {label || 'Dropdown Menu'}
+          {this.renderChoice()}
           <span className={arrowClassNames} />
         </div>
         <div className="menu-items">
-          <MenuContext.Provider value={selected}>
-            {React.Children.map(
-              children,
-              (item, key) =>
-                item.type.name === 'MenuGroup' ||
-                item.props.label.indexOf(label) !== -1
-                  ? React.cloneElement(item, {
-                      selected: this.state.selected,
-                      index: key,
-                      setActive: this.setActive,
-                    })
-                  : null
-            )}
+          <MenuContext.Provider value={{ label, selected }}>
+            {this.renderOptions()}
           </MenuContext.Provider>
         </div>
       </div>

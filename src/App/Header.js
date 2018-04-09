@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import Menu, { MenuItem } from 'italki-ui/Menu';
 
 class Header extends PureComponent {
   languages = [

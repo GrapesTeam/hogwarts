@@ -148,33 +148,40 @@ storiesOf('Button', module)
 
 storiesOf('Menu', module)
   .add('Normal', () => (
-    <Menu search style={{ width: '200px' }}>
+    <Menu selected={2} search style={{ width: '200px' }}>
       <MenuItem
-        label={
+        value={
           'Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A'
         }
         onClick={action('menu-click')}>
         Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A
       </MenuItem>
-      <MenuItem label={'Lorem'}>
-        <span>Lorem ipsum B</span>
-      </MenuItem>
-      <MenuItem label={'Lorem ipsum C'}>Lorem ipsum C</MenuItem>
-      <MenuItem label={'Lorem ipsum D'}>Lorem ipsum D</MenuItem>
-      <MenuItem label={'Lorem ipsum E'}>Lorem ipsum E</MenuItem>
+      <MenuItem value={'Lorem'}>Lorem ipsum B</MenuItem>
+      <MenuItem value={'Lorem ipsum C'}>Lorem ipsum C</MenuItem>
+      <MenuItem value={'Lorem ipsum D'}>Lorem ipsum D</MenuItem>
+      <MenuItem value={'Lorem ipsum E'}>Lorem ipsum E</MenuItem>
     </Menu>
   ))
   .add('Dropdown group', () => (
-    <Menu search style={{ width: '200px' }}>
-      <MenuGroup name="Category">
-        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
-        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
-        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
+    <Menu selected="2G4" placeholder="Choice" search style={{ width: '200px' }}>
+      <MenuItem value={'C Lorem ipsum'}>
+        <span>
+          <img />
+        </span>
+      </MenuItem>
+      <MenuGroup name="Category A">
+        <MenuItem value={'A Lorem ipsum'}>A Lorem ipsum</MenuItem>
+        <MenuItem value={'Lorem ipsum'}>B Lorem ipsum</MenuItem>
+        <MenuItem value={'Lorem ipsum'}>
+          <span>
+            <img />
+          </span>
+        </MenuItem>
       </MenuGroup>
-      <MenuGroup name="Category">
-        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
-        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
-        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
+      <MenuGroup name="Category B">
+        <MenuItem value={'d Lorem ipsum'}>D Lorem ipsum</MenuItem>
+        <MenuItem value={'Lorem ipsum'}>Lorem ipsum E</MenuItem>
+        <MenuItem value={'Lorem ipsum'}>Lorem ipsum F</MenuItem>
       </MenuGroup>
     </Menu>
   ));

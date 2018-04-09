@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import cx from 'classnames';
 import { MenuContext } from './Menu';
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
   onClick?: Function,
   setActive: Function,
   actived: boolean,
+  disabled: boolean,
   value: string,
   label: string,
 };
@@ -15,25 +17,31 @@ type Props = {
 class MenuItem extends React.PureComponent<Props> {
   static defaultProps = {
     value: '',
+    disabled: false,
   };
 
   handleClick = () => {
-    this.props.setActive({
-      index: this.props.index,
-      value: this.props.value,
-      label: this.props.label,
-    });
-    if (this.props.onClick) {
-      this.props.onClick();
+    if (!this.props.disabled) {
+      this.props.setActive({
+        index: this.props.index,
+        value: this.props.value,
+        label: this.props.children,
+      });
+      if (this.props.onClick) {
+        this.props.onClick();
+      }
     }
   };
 
   render() {
-    const { children, index } = this.props;
+    const { children, disabled, index } = this.props;
+    const classnames = cx('menu-item', {
+      'menu-item-disabled': disabled,
+    });
     return (
       <MenuContext.Consumer>
-        {selected => (
-          <div className="menu-item" onClick={this.handleClick}>
+        {({ selected }) => (
+          <div className={classnames} onClick={this.handleClick}>
             {selected === index ? <div className="checkmark" /> : null}
             <div>{children}</div>
           </div>

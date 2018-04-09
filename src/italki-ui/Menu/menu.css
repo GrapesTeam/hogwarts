@@ -54,9 +54,11 @@
   width: 100%;
   max-height: 300px;
   overflow-y: scroll;
+  background: #ffffff;
   border: solid 1px #cccccc;
   border-radius: 0 0 2px 2px;
   transition: max-height 0.3s;
+  z-index: 9999;
 }
 
 .menu-hide .menu-items {
@@ -72,6 +74,11 @@
 .menu-item:hover {
   background: rgba(204, 204, 204, 0.2);
   cursor: pointer;
+}
+
+.menu-item-disabled:hover {
+  background: #ffffff;
+  cursor: default;
 }
 
 .menu-group-name {
