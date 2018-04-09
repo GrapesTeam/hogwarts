@@ -2,7 +2,7 @@
   position: relative;
   margin: 0;
   padding: 0;
-  height: 42px;
+  height: 45px;
   font-family: 'Roboto';
   font-size: 14px;
   border: solid 1px #cccccc;
@@ -41,7 +41,7 @@
 }
 
 .menu-title {
-  padding: 13px 38px 13px 12px;
+  padding: 15px 38px 15px 12px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -65,13 +65,21 @@
 
 .menu-item {
   display: flex;
-  padding: 13px 12px;
+  padding: 9px 12px;
   min-height: 16px;
 }
 
 .menu-item:hover {
   background: rgba(204, 204, 204, 0.2);
   cursor: pointer;
+}
+
+.menu-group-name {
+  margin: 0;
+  padding: 9px 12px;
+  font-weight: 900;
+  font-size: 14px;
+  color: #333333; 
 }
 
 .arrow-down, .arrow-up {

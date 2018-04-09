@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
+import MenuGroup from './MenuGroup';
+import MenuItem from './MenuItem';
 import './menu.css';
+
+export const MenuContext = React.createContext({
+  selected: -1,
+});
 
 class Menu extends Component {
   static defaultProps = {
@@ -79,7 +85,7 @@ class Menu extends Component {
 
   render() {
     const { children, classname, search, style } = this.props;
-    const { label, open } = this.state;
+    const { label, open, selected } = this.state;
     const classnames = cx('menu', classname, {
       'menu-hide': !open,
     });
@@ -91,21 +97,24 @@ class Menu extends Component {
       <div className={classnames} style={style}>
         {search ? this.renderInput() : null}
         <div onClick={this.openMenu} className="menu-title">
-          {label ? label : 'Dropdown Menu'}
+          {label || 'Dropdown Menu'}
           <span className={arrowClassNames} />
         </div>
         <div className="menu-items">
-          {React.Children.map(children, (item, index) => {
-            if (item.props.label.indexOf(label) !== -1) {
-              return React.cloneElement(item, {
-                actived: index === this.state.selected,
-                index,
-                onClick: this.setActive,
-              });
-            } else {
-              return null;
-            }
-          })}
+          <MenuContext.Provider value={selected}>
+            {React.Children.map(
+              children,
+              (item, key) =>
+                item.type.name === 'MenuGroup' ||
+                item.props.label.indexOf(label) !== -1
+                  ? React.cloneElement(item, {
+                      selected: this.state.selected,
+                      index: key,
+                      setActive: this.setActive,
+                    })
+                  : null
+            )}
+          </MenuContext.Provider>
         </div>
       </div>
     );

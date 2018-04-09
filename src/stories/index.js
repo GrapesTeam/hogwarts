@@ -8,7 +8,7 @@ import { linkTo } from '@storybook/addon-links';
 // italki ui
 import InputField from '../Common/InputField';
 import Button from '../italki-ui/Button';
-import Menu, { MenuItem } from '../italki-ui/Menu';
+import Menu, { MenuItem, MenuGroup } from '../italki-ui/Menu';
 
 const firstArgAction = decorateAction([
   args => {
@@ -146,20 +146,35 @@ storiesOf('Button', module)
     </div>
   ));
 
-storiesOf('Menu', module).add('Normal', () => (
-  <Menu search style={{ width: '200px' }}>
-    <MenuItem
-      label={
-        'Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A'
-      }
-      onClick={action('menu-click')}>
-      Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A
-    </MenuItem>
-    <MenuItem label={'Lorem'}>
-      <span>Lorem ipsum B</span>
-    </MenuItem>
-    <MenuItem label={'Lorem ipsum C'}>Lorem ipsum C</MenuItem>
-    <MenuItem label={'Lorem ipsum D'}>Lorem ipsum D</MenuItem>
-    <MenuItem label={'Lorem ipsum E'}>Lorem ipsum E</MenuItem>
-  </Menu>
-));
+storiesOf('Menu', module)
+  .add('Normal', () => (
+    <Menu search style={{ width: '200px' }}>
+      <MenuItem
+        label={
+          'Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A'
+        }
+        onClick={action('menu-click')}>
+        Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A Lorem ipsum A
+      </MenuItem>
+      <MenuItem label={'Lorem'}>
+        <span>Lorem ipsum B</span>
+      </MenuItem>
+      <MenuItem label={'Lorem ipsum C'}>Lorem ipsum C</MenuItem>
+      <MenuItem label={'Lorem ipsum D'}>Lorem ipsum D</MenuItem>
+      <MenuItem label={'Lorem ipsum E'}>Lorem ipsum E</MenuItem>
+    </Menu>
+  ))
+  .add('Dropdown group', () => (
+    <Menu search style={{ width: '200px' }}>
+      <MenuGroup name="Category">
+        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
+        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
+        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
+      </MenuGroup>
+      <MenuGroup name="Category">
+        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
+        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
+        <MenuItem label={'Lorem ipsum'}>Lorem ipsum</MenuItem>
+      </MenuGroup>
+    </Menu>
+  ));
